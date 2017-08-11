@@ -17,9 +17,9 @@
     <div class="grid" data-grid="center none">
         <div class="grid__item" data-grid="8/12">
             <h2>Name of test</h2>
-            <div  *ngFor="let item of items | async"  class="s-question_body">
+            <div *ngFor="let item of items | async" class="s-question_body">
                 <div class="s-question_title">
-                   {{item.question}}
+                    {{item.question}}
                 </div>
                 <div class="grid s-question_list" data-grid="center none">
                     <div class="grid__item" data-grid="3/12">
@@ -39,7 +39,8 @@
                     </div>
                     <div class="grid__item" data-grid="3/12">
                         <div class="s-question_item">
-                            {{item.answers.a4}}                        </div>
+                            {{item.answers.a4}} 
+                        </div>
                     </div>
                 </div>
                 <div class="grid s-question_list" data-grid="center none">
