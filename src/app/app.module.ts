@@ -28,7 +28,21 @@ import { AppState, InternalStateType } from './app.service';
 import '../styles/styles.scss';
 import '../styles/headings.css';
 import { HomePageModule } from "./home/home.module";
+import { QuestionsListComponent } from "./questions-list/questions-list.component";
+import { AngularFireModule } from 'angularfire2';
 
+// New imports to update based on AngularFire2 version 4
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+
+export const firebaseConfig = {
+  apiKey: "AIzaSyB317U7_q357AO3NMeBmUznWLuEdWCf0wU",
+  authDomain: "quesinator-f7538.firebaseapp.com",
+  databaseURL: "https://quesinator-f7538.firebaseio.com",
+  projectId: "quesinator-f7538",
+  storageBucket: "quesinator-f7538.appspot.com",
+  messagingSenderId: "24618923572"
+};
 // Application wide providers
 const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
@@ -45,9 +59,10 @@ type StoreType = {
  * `AppModule` is the main entry point into Angular2's bootstraping process
  */
 @NgModule({
-  bootstrap: [ AppComponent ],
+  bootstrap: [AppComponent],
   declarations: [
-    AppComponent
+    AppComponent,
+    QuestionsListComponent
   ],
   /**
    * Import Angular's modules.
@@ -57,6 +72,9 @@ type StoreType = {
     FormsModule,
     HttpModule,
     HomePageModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
     RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules })
   ],
   /**
@@ -72,7 +90,7 @@ export class AppModule {
   constructor(
     public appRef: ApplicationRef,
     public appState: AppState
-  ) {}
+  ) { }
 
   public hmrOnInit(store: StoreType) {
     if (!store || !store.state) {
@@ -110,7 +128,7 @@ export class AppModule {
     /**
      * Save input values
      */
-    store.restoreInputValues  = createInputTransfer();
+    store.restoreInputValues = createInputTransfer();
     /**
      * Remove styles
      */

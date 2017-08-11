@@ -19,11 +19,19 @@ header {
     height: 100%;
     padding-bottom: 70px;
     padding-top: 30px;
+    &_user {
+        margin-top: 20px;
+        &-description {
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+    }
     &_test {
         display: flex;
         align-items: center;
         flex-direction: column;
-        text-align: center;;
+        text-align: center;
+        padding: 0 5px;
     }
     &_test-img {
         width: 50px;
@@ -34,6 +42,10 @@ header {
             overflow: hidden;
         }
     }
+}
+
+.mgbt20 {
+    margin-bottom: 20px;
 }
 
 

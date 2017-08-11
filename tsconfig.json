@@ -26,6 +26,7 @@
       "hammerjs",
       "jasmine",
       "node",
+      "firebase",
       "source-map",
       "uglify-js",
       "webpack"
