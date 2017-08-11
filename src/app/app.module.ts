@@ -27,7 +27,7 @@ import { AppState, InternalStateType } from './app.service';
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
-import { HomeComponent } from "./home/home.component";
+import { HomePageModule } from "./home/home.module";
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -47,8 +47,7 @@ type StoreType = {
 @NgModule({
   bootstrap: [ AppComponent ],
   declarations: [
-    AppComponent,
-    HomeComponent
+    AppComponent
   ],
   /**
    * Import Angular's modules.
@@ -57,6 +56,7 @@ type StoreType = {
     BrowserModule,
     FormsModule,
     HttpModule,
+    HomePageModule,
     RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules })
   ],
   /**

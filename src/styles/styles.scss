@@ -2,6 +2,10 @@
 /* This file is for setting global styles  */
 @import 'variables';
 
+//libs
+@import "~gridilydidily/gridilydidily.scss";
+@import "~normalize.css/normalize.css";
+
 nav {
   margin-top: 16px;
 }
