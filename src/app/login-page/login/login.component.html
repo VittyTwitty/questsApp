@@ -1,0 +1,10 @@
+<form [formGroup]="loginForm" (submit)="loginUser($event, myForm.value)" #myForm='ngForm' class="s-login_form">
+
+        <input mdInput type="text" name="email" formControlName="email" placeholder="Email">
+
+        <input mdInput type="text" name="password" formControlName="password" placeholder="Password">
+   
+
+    <button md-button type="submit">Login</button>
+</form>
+    <button md-button type="submit" (click)='loginUserGoogle'>Login width Google</button>

@@ -29,20 +29,21 @@ import '../styles/styles.scss';
 import '../styles/headings.css';
 import { HomePageModule } from "./home/home.module";
 import { QuestionsListComponent } from "./questions-list/questions-list.component";
+import { QuestionsItemComponent } from "./questions-item/questions-item.component";
 import { AngularFireModule } from 'angularfire2';
 
 // New imports to update based on AngularFire2 version 4
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { QuestionService } from "./shared/questions.service";
+import { QuestionsResultComponent } from "./questions-result/questions-result.component";
+import { SharedModule } from "./shared/shared.module";
+import { QuestionModule } from "./questions/questions.module";
+import { AuthService } from "./core/auth.service";
+import { LoginPageModule } from "./login-page/login-page.module";
+import { AuthGuard } from "./core/auth-guard.service";
 
-export const firebaseConfig = {
-  apiKey: "AIzaSyB317U7_q357AO3NMeBmUznWLuEdWCf0wU",
-  authDomain: "quesinator-f7538.firebaseapp.com",
-  databaseURL: "https://quesinator-f7538.firebaseio.com",
-  projectId: "quesinator-f7538",
-  storageBucket: "quesinator-f7538.appspot.com",
-  messagingSenderId: "24618923572"
-};
+
 // Application wide providers
 const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
@@ -54,7 +55,14 @@ type StoreType = {
   restoreInputValues: () => void,
   disposeOldHosts: () => void
 };
-
+export const firebaseConfig = {
+  apiKey: "AIzaSyB317U7_q357AO3NMeBmUznWLuEdWCf0wU",
+  authDomain: "quesinator-f7538.firebaseapp.com",
+  databaseURL: "https://quesinator-f7538.firebaseio.com",
+  projectId: "quesinator-f7538",
+  storageBucket: "quesinator-f7538.appspot.com",
+  messagingSenderId: "24618923572"
+};
 /**
  * `AppModule` is the main entry point into Angular2's bootstraping process
  */
@@ -62,7 +70,6 @@ type StoreType = {
   bootstrap: [AppComponent],
   declarations: [
     AppComponent,
-    QuestionsListComponent
   ],
   /**
    * Import Angular's modules.
@@ -72,6 +79,8 @@ type StoreType = {
     FormsModule,
     HttpModule,
     HomePageModule,
+    QuestionModule,
+    LoginPageModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
@@ -82,7 +91,10 @@ type StoreType = {
    */
   providers: [
     ENV_PROVIDERS,
-    APP_PROVIDERS
+    APP_PROVIDERS,
+    QuestionService,
+    AuthService,
+    AuthGuard
   ]
 })
 export class AppModule {

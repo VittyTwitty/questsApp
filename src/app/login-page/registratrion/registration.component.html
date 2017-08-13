@@ -1,0 +1,7 @@
+<form [formGroup]="signUpForm" (submit)="signUpUser($event, myForm.value)" #myForm='ngForm' class="s-signip_form">
+    <input  type="text" placeholder="Email" name='email' formControlName="email" />
+    <input  type="text" placeholder="Password" formControlName="password" name="password" />
+    <input  type="text" placeholder="Confimr password" formControlName="confirm_password" name="confirm_password" />
+    <button  type="submit">Registration</button>
+
+</form>
