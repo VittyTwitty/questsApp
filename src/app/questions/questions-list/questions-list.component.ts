@@ -8,6 +8,7 @@ import { QuestionService } from "../../shared/questions.service";
 import { Subscription } from "rxjs/Subscription";
 import { Questions } from "../../shared/models/questions";
 import { Router } from "@angular/router";
+import { SharedService } from "../../shared/services/shared.service";
 
 @Component({
     selector: 'q-question-list',
@@ -28,7 +29,8 @@ export class QuestionsListComponent implements OnInit {
     public coorectAnswersDone: number[] = [];
     constructor(
         private questionService: QuestionService,
-        private router: Router
+        private router: Router,
+        private sharedService: SharedService
     ) {
 
         this.getQuestions();
@@ -38,6 +40,7 @@ export class QuestionsListComponent implements OnInit {
 
     }
     ngOnInit() {
+        this.sharedService.trueAnswers = this.coorectAnswersDone;
     }
 
     public getQuestions() {

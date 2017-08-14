@@ -44,7 +44,9 @@ import { LoginPageModule } from "./login-page/login-page.module";
 import { AuthGuard } from "./core/auth-guard.service";
 import { LocalStorageService } from "./core/local-storage.service";
 import { UserService } from "./core/user.service";
+import { SharedService } from "./shared/services/shared.service";
 
+import 'chart.js';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -98,7 +100,8 @@ export const firebaseConfig = {
     AuthService,
     LocalStorageService,
     AuthGuard,
-    UserService
+    UserService,
+    SharedService
   ]
 })
 export class AppModule {
