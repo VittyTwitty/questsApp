@@ -33,9 +33,9 @@ export class LoginComponent implements OnInit {
 
     }
 
-    public loginUserGoogle($event) {
-        $event.preventDefault();
-        this.authService.loginGoogle();
+    // public loginUserGoogle($event) {
+    //     $event.preventDefault();
+    //     this.authService.loginGoogle();
 
-    }
+    // }
 }

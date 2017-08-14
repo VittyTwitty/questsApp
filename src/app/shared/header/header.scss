@@ -9,5 +9,28 @@ header {
     }
     .header-username {
         float: right;
+        color: #fff;
     }    
+    .header-logout {
+        height: 30px;
+        width: 30px;
+        cursor: pointer;
+        svg {
+            margin-left: 20px;
+            height: 100%;
+            width: 100%;
+        }
+    }
+    .header-username-wrp {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+    .header-username-nolog {
+        float: right;
+        color: #4a4a4a;
+        a {
+            color: #fff;
+        }
+    }
 }

@@ -4,7 +4,8 @@
     <div class="grid" data-grid="center">
         <div class="grid__item" data-grid="4/12">
             <div class="s-home_user">
-                <h3>Hello, user_100</h3>
+                <h3 *ngIf="loggedInUser">Hello, {{user?.email}}</h3>
+                <h3 *ngIf="!loggedInUser">Tests</h3>
                 <div class="s-home_user-description">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error doloremque accusantium, minima ducimus ipsa aspernatur harum molestiae est sunt animi!
                 </div>

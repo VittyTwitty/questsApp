@@ -14,7 +14,7 @@ export class QuestionService {
         public afAuth: AngularFireAuth,
         public af: AngularFireDatabase) {
         this.user = this.afAuth.authState;
-    }
+    };
 
     getQuestion() {
         return this.af.list('/questions', {

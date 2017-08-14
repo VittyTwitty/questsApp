@@ -42,6 +42,8 @@ import { QuestionModule } from "./questions/questions.module";
 import { AuthService } from "./core/auth.service";
 import { LoginPageModule } from "./login-page/login-page.module";
 import { AuthGuard } from "./core/auth-guard.service";
+import { LocalStorageService } from "./core/local-storage.service";
+import { UserService } from "./core/user.service";
 
 
 // Application wide providers
@@ -84,7 +86,7 @@ export const firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(ROUTES, { preloadingStrategy: PreloadAllModules })
   ],
   /**
    * Expose our Services and Providers into Angular's dependency injection.
@@ -94,7 +96,9 @@ export const firebaseConfig = {
     APP_PROVIDERS,
     QuestionService,
     AuthService,
-    AuthGuard
+    LocalStorageService,
+    AuthGuard,
+    UserService
   ]
 })
 export class AppModule {

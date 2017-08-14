@@ -11,7 +11,8 @@ import { SharedModule } from "../shared/shared.module";
     imports: [
         CommonModule,
         RouterModule.forChild(homeRoutes),
-        SharedModule
+        SharedModule,
+        
     ],
     exports: [
         HomeComponent,
@@ -20,6 +21,7 @@ import { SharedModule } from "../shared/shared.module";
         HomeComponent,
     ],
     providers: [
+        
 
     ],
 })

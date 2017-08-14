@@ -5,6 +5,7 @@ import { CommonModule } from "@angular/common";
 import { RouterModule } from "@angular/router";
 import { FooterComponent } from "./footer/footer";
 import { HeaderComponent } from "./header/header";
+import { AuthService } from "../core/auth.service";
 
 @NgModule({
 
@@ -21,6 +22,8 @@ import { HeaderComponent } from "./header/header";
         HeaderComponent,
         FooterComponent
     ],
-    providers: [],
+    providers: [
+        AuthService
+    ],
 })
 export class SharedModule { }

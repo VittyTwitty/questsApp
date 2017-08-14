@@ -5,19 +5,23 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import * as firebase from 'firebase/app';
 import { Router } from "@angular/router";
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { AngularFireAuth } from "angularfire2/auth";
 import { AngularFireDatabase } from "angularfire2/database";
+import { LocalStorageService } from "./local-storage.service";
 
 @Injectable()
 export class AuthService {
     public isLoggedIn = false;
     public redirectUrl: string;
+    public subject = new BehaviorSubject(this.loggedIn());
 
     public user: Observable<firebase.User>;
     constructor(
         public afa: AngularFireAuth,
         public afd: AngularFireDatabase,
-        private router: Router
+        private router: Router,
+        private lSService: LocalStorageService
     ) {
         this.user = afa.authState;
     }
@@ -26,7 +30,7 @@ export class AuthService {
         return this.afa
             .auth
             .createUserWithEmailAndPassword(email, password)
-           
+
     }
 
     public addUserInfoFromForm(uid, email: string, password: string) {
@@ -40,35 +44,53 @@ export class AuthService {
             .auth
             .signInWithEmailAndPassword(email, password)
             .then(res => {
-                alert('Logged');
+                console.log(res);
+                this.lSService.user = res;
                 this.isLoggedIn = true;
             })
             .catch(error => {
-                alert('Idi regaysia')
+                alert('Idi regaysia');
             })
     }
-    loginGoogle() {
-        this.afa.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
-        .then(res => {
-            alert('Google in');
-        })
-        .catch( error=> {
-            alert('dont in');
-        })
-    }
+    // loginGoogle() {
+    //     this.afa.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
+    //         .then(res => {
+    //             alert('Google in');
+    //         })
+    //         .catch(error => {
+    //             alert('dont in');
+    //         })
+    // }
 
     public logout() {
-        this.afa
+        return this.afa
             .auth
             .signOut()
             .then(res => {
-                this.router.navigate(['/sign-in']);
+                this.lSService.deleteLocalUser();
                 this.isLoggedIn = false;
+                this.signInListener();
+
             })
             .catch(error => {
-
             })
     }
 
+    public signInListener() {
+        if (this.lSService.user) {
+            return this.subject.next(true);
+        } else {
+            localStorage.removeItem('auth_token');
+            return this.subject.next(false);
+        }
+    }
+
+    public authListener(): Observable<any> {
+        let subAsObservable = this.subject.asObservable();
+        return subAsObservable;
+    }
+    public loggedIn() {
+        return !!this.lSService.user;
+    }
 
 }
