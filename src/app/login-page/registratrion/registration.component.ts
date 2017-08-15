@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from "@angular/forms";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { AuthService } from "../../core/auth.service";
 import { Router } from "@angular/router";
+import { ValidationPatternsService } from "../../shared/services/validation-patterns.service";
 
 @Component({
     selector: 'q-registration',
@@ -11,19 +12,38 @@ import { Router } from "@angular/router";
 
 export class RegistrationComponent implements OnInit {
 
-    public signUpForm: FormGroup = new FormGroup({
-        email: new FormControl(''),
-        password: new FormControl(''),
-        confirm_password: new FormControl('')
+    public registrationForm: FormGroup = new FormGroup({
+        email: new FormControl(null, Validators.compose([
+            Validators.required,
+            Validators.minLength(5),
+            Validators.maxLength(30),
+            Validators.pattern(this.validationPattern.email)
+        ])),
+        password: new FormControl(null, Validators.compose([
+            Validators.required,
+            Validators.minLength(9),
+            Validators.maxLength(30),
+            Validators.pattern(this.validationPattern.password)
+        ])),
+        confirm_password: new FormControl(null, Validators.compose([
+            Validators.required,
+            this.validatePasswordConfirmation.bind(this)
+        ]))
     })
     constructor(
         private authService: AuthService,
-        private router: Router
+        private router: Router,
+        private validationPattern: ValidationPatternsService
     ) { }
 
     ngOnInit() { }
-
-    signUpUser($event, myForm: any) {
+    
+    public validatePasswordConfirmation(control: FormControl): any {
+        if (this.registrationForm) {
+            return control.value === this.registrationForm.get('password').value ? null : { notSame: true };
+        }
+    }
+    registration($event, myForm: any) {
         $event.preventDefault();
         this.authService
             .register(myForm.email, myForm.password)

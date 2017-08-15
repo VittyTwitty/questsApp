@@ -47,6 +47,7 @@ import { UserService } from "./core/user.service";
 import { SharedService } from "./shared/services/shared.service";
 
 import 'chart.js';
+import { ValidationPatternsService } from "./shared/services/validation-patterns.service";
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -101,7 +102,8 @@ export const firebaseConfig = {
     LocalStorageService,
     AuthGuard,
     UserService,
-    SharedService
+    SharedService,
+    ValidationPatternsService
   ]
 })
 export class AppModule {

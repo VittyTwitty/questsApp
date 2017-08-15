@@ -23,7 +23,7 @@ import { AuthService } from "../core/auth.service";
         FooterComponent
     ],
     providers: [
-        AuthService
+        AuthService,
     ],
 })
 export class SharedModule { }

@@ -1,10 +1,35 @@
-<form [formGroup]="loginForm" (submit)="loginUser($event, myForm.value)" #myForm='ngForm' class="s-login_form">
-
-        <input mdInput type="text" name="email" formControlName="email" placeholder="Email">
-
-        <input mdInput type="text" name="password" formControlName="password" placeholder="Password">
-   
-
-    <button md-button type="submit">Login</button>
-</form>
-    <button md-button type="submit" (click)='loginUserGoogle'>Login width Google</button>
+<div class="login">
+    <div class="login_header">
+        <h2>Login</h2>
+    </div>
+    <div class="login_body">
+        <div class="login_form-wrapper">
+            <form [formGroup]="loginForm" (submit)="loginUser($event, addLoginForm.value)" #addLoginForm="ngForm" id="login_form" class="login_form" novalidate>
+                <label>
+                    <span>Email: </span>
+                    <input type="text" placeholder="Email" name="email" formControlName="email">
+                </label>
+                <div class="alert_invalid" *ngIf="!loginForm.controls['email'].valid && (loginForm.controls['email'].touched || addLoginForm.submitted)">
+                    <p *ngIf="loginForm.controls['email'].hasError('required')">Input field required</p>
+                    <p *ngIf="loginForm.controls['email'].hasError('minlength')">Password must be 5 characters long, you need another {{loginForm.controls['email'].errors.minlength.requiredLength - loginForm.controls['email'].errors.minlength.actualLength}} characters.</p>
+                    <p *ngIf="loginForm.controls['email'].hasError('pattern')">Please, enter your true email</p>
+                </div>
+                <label>
+                    <span>Password: </span>
+                    <input type="password" placeholder="Password" name="password" formControlName="password">
+                </label>
+              <div class="alert_invalid" *ngIf="!loginForm.controls['password'].valid && (loginForm.controls['password'].touched || addLoginForm.submitted)">
+                    <p *ngIf="loginForm.controls['password'].hasError('required')">Input field required</p>
+                    <p *ngIf="loginForm.controls['password'].hasError('minlength')">Password must be 9 characters long, you need another {{loginForm.controls['password'].errors.minlength.requiredLength - loginForm.controls['password'].errors.minlength.actualLength}} characters.</p>
+                    <p *ngIf="loginForm.controls['password'].hasError('maxlength')">The max password length is 30 characters</p>
+                    <p *ngIf="loginForm.controls['password'].hasError('pattern')">Please enter numbers and letters</p>
+                </div>
+                <button class="login_form-button" type="submit">Login</button>
+            </form>
+            <div class="login_links">
+                <a [routerLink]="['/sign-up']" class="login_links-register">Register</a>
+                
+            </div>
+        </div>
+    </div>
+</div>
