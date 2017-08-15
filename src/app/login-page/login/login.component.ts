@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
             Validators.required,
             Validators.minLength(9),
             Validators.maxLength(30),
-            Validators.pattern(this.validationPattern.password)
+            // Validators.pattern(this.validationPattern.password)
         ]))
     })
 

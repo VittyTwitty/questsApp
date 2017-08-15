@@ -17,6 +17,7 @@ import { SharedService } from "../../shared/services/shared.service";
 })
 
 export class QuestionsListComponent implements OnInit {
+    answerThis: any[] = [];
     public quest: Questions[];
     // public sub: Subscription;
     public questionId: number;
@@ -30,7 +31,7 @@ export class QuestionsListComponent implements OnInit {
     constructor(
         private questionService: QuestionService,
         private router: Router,
-        private sharedService: SharedService
+        private sharedService: SharedService,
     ) {
 
         this.getQuestions();
@@ -41,6 +42,11 @@ export class QuestionsListComponent implements OnInit {
     }
     ngOnInit() {
         this.sharedService.trueAnswers = this.coorectAnswersDone;
+
+        this.questionService.getQuestionInfoFromForm().subscribe(res => {
+            this.answerThis = res;
+        })
+        console.log(this.answerThis)
     }
 
     public getQuestions() {
@@ -74,12 +80,12 @@ export class QuestionsListComponent implements OnInit {
             radioId = +element.id.slice(6)
             if (element.checked) {
                 if (radioId == this.quest[this.ind].correct) {
-                    console.log('Ответ верный', radioId);
+                    // console.log('Ответ верный', radioId);
                     this.coorectAnswersDone.push(this.quest[this.ind].correct);
-                    console.log(this.coorectAnswersDone);
+                    // console.log(this.coorectAnswersDone);
                 } else {
                     this.coorectAnswersDone.push(0);
-                    console.log('Ответ неверный', radioId);
+                    // console.log('Ответ неверный', radioId);
                 }
             }
         });
@@ -100,11 +106,38 @@ export class QuestionsListComponent implements OnInit {
             this.correctAnswerOrNo();
             this.ind++;
             this.addUncheckedRadio();
+            console.log(this.answerThis);
         } else {
             this.correctAnswerOrNo();
             this.ind++;
             console.log(this.maxId())
-            console.log(this.coorectAnswersDone);
+
+
+
+            for (let i = 0; i < this.coorectAnswersDone.length; i++) {
+                if (this.coorectAnswersDone[i] == 1) {
+                    let qwer;
+                    let nocorrect;
+                    qwer = this.answerThis[i].correctly;
+                    nocorrect = this.answerThis[i].nocorrectly;
+                    qwer++;
+
+                    this.questionService.addQuestionInfoFromForm(i, qwer, nocorrect)
+                } else {
+                    let qwer;
+                    let correct;
+                    correct = this.answerThis[i].correctly;
+                    qwer = this.answerThis[i].nocorrectly;
+
+                    qwer++;
+                    this.questionService.addQuestionInfoFromForm(i, correct, qwer)
+
+                }
+                console.log(this.questionService)
+            }
+
+
+
             this.router.navigate(['/result'])
         }
 

@@ -12,7 +12,8 @@ export class QuestionService {
 
     constructor(
         public afAuth: AngularFireAuth,
-        public af: AngularFireDatabase) {
+        public af: AngularFireDatabase,
+    ) {
         this.user = this.afAuth.authState;
     };
 
@@ -21,7 +22,18 @@ export class QuestionService {
             query: {
                 limitToLast: 5
             }
-        });        
+        });
     }
-  
+
+    public getQuestionInfoFromForm() {
+        return this.af.list('q-answers/');
+    }
+
+    public addQuestionInfoFromForm(i: number, i2: number, i3: number) {
+        return this.af.object('q-answers/' + i).set({
+            correctly: i2,
+            nocorrectly: i3
+        })
+    }
+
 }

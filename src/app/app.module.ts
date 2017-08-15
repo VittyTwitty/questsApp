@@ -48,6 +48,8 @@ import { SharedService } from "./shared/services/shared.service";
 
 import 'chart.js';
 import { ValidationPatternsService } from "./shared/services/validation-patterns.service";
+import { AdminModule } from "./admin/admin.module";
+import { TrueAnswersResolver } from "./shared/services/true-anwsers.resolver";
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -84,6 +86,7 @@ export const firebaseConfig = {
     FormsModule,
     HttpModule,
     HomePageModule,
+    AdminModule,
     QuestionModule,
     LoginPageModule,
     AngularFireModule.initializeApp(firebaseConfig),
@@ -103,7 +106,8 @@ export const firebaseConfig = {
     AuthGuard,
     UserService,
     SharedService,
-    ValidationPatternsService
+    ValidationPatternsService,
+    TrueAnswersResolver
   ]
 })
 export class AppModule {

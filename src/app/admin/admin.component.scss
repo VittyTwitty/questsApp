@@ -1,0 +1,17 @@
+.s-admin{
+    &-header {
+        width: 100%;
+        text-align: center;
+    }
+    &-body {
+        text-align: center;
+        margin-top: 40px;
+    }
+    &-best,
+    &-easy,
+    &-hard {
+        div {
+            margin-bottom: 20px;
+        }
+    }
+}

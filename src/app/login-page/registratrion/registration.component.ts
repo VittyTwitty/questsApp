@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { AuthService } from "../../core/auth.service";
 import { Router } from "@angular/router";
 import { ValidationPatternsService } from "../../shared/services/validation-patterns.service";
+import { QuestionService } from "../../shared/questions.service";
 
 @Component({
     selector: 'q-registration',
