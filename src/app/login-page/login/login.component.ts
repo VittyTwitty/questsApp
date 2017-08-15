@@ -37,14 +37,25 @@ export class LoginComponent implements OnInit {
         console.log(myForm.email)
         $event.preventDefault();
         this.authService.login(myForm.email, myForm.password)
-            .then(res => {
+            .then((user) => {
+                console.log(user);
+                this.authService.fromDbUserInfoFromForm(user.uid).then(res => {
+                    console.log(res)
+                })
                 this.router.navigate(['/']);
+                //     .subscribe((res2) => {
+                //         console.log('res2', res2)
+                //         this.router.navigate(['/']);
+
+                //     })
             })
-            .catch(error => {
+            .catch((error) => {
 
             })
 
     }
+
+
 
     // public loginUserGoogle($event) {
     //     $event.preventDefault();

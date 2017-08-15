@@ -14,6 +14,11 @@ import { QuestionService } from "../../shared/questions.service";
 export class RegistrationComponent implements OnInit {
 
     public registrationForm: FormGroup = new FormGroup({
+        name: new FormControl(null, Validators.compose([
+            Validators.required,
+            Validators.minLength(2),
+            Validators.maxLength(30),
+        ])),
         email: new FormControl(null, Validators.compose([
             Validators.required,
             Validators.minLength(5),
@@ -38,7 +43,7 @@ export class RegistrationComponent implements OnInit {
     ) { }
 
     ngOnInit() { }
-    
+
     public validatePasswordConfirmation(control: FormControl): any {
         if (this.registrationForm) {
             return control.value === this.registrationForm.get('password').value ? null : { notSame: true };
@@ -49,7 +54,7 @@ export class RegistrationComponent implements OnInit {
         this.authService
             .register(myForm.email, myForm.password)
             .then((user) => {
-                this.authService.addUserInfoFromForm(user.uid, myForm.email, myForm.password)
+                this.authService.addUserInfoFromForm(user.uid, myForm.email, myForm.name, myForm.password)
                     .then((res) => {
                         this.router.navigate(['/sign-in']);
                     })

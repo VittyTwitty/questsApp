@@ -9,6 +9,9 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { AngularFireAuth } from "angularfire2/auth";
 import { AngularFireDatabase } from "angularfire2/database";
 import { LocalStorageService } from "./local-storage.service";
+import { UserService } from "./user.service";
+import 'rxjs/add/operator/toPromise';
+
 
 @Injectable()
 export class AuthService {
@@ -21,7 +24,8 @@ export class AuthService {
         public afa: AngularFireAuth,
         public afd: AngularFireDatabase,
         private router: Router,
-        private lSService: LocalStorageService
+        private lSService: LocalStorageService,
+        private userService: UserService
     ) {
         this.user = afa.authState;
     }
@@ -29,38 +33,42 @@ export class AuthService {
     public register(email: string, password: string) {
         return this.afa
             .auth
-            .createUserWithEmailAndPassword(email, password)
+            .createUserWithEmailAndPassword(email, password);
 
     }
 
-    public addUserInfoFromForm(uid, email: string, password: string) {
+    public addUserInfoFromForm(uid, email: string, name: string, password: string) {
         return this.afd.object('q-users/' + uid).set({
             email: email,
-            password: password
+            name: name,
+            password: password,
+
         })
     }
     public login(email: string, password: string) {
         return this.afa
             .auth
             .signInWithEmailAndPassword(email, password)
-            .then(res => {
-                console.log(res);
-                this.lSService.user = res;
+            .then(user => {
+                this.lSService.user = user;
                 this.isLoggedIn = true;
             })
             .catch(error => {
                 alert('Idi regaysia');
             })
+
     }
-    // loginGoogle() {
-    //     this.afa.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
-    //         .then(res => {
-    //             alert('Google in');
-    //         })
-    //         .catch(error => {
-    //             alert('dont in');
-    //         })
-    // }
+
+
+    public fromDbUserInfoFromForm(uid) {
+        return this.afd.object('q-users/' + uid)
+            .map(res => {
+                let prof = res;
+                return prof;
+
+            }).toPromise();
+    }
+
 
     public logout() {
         return this.afa
