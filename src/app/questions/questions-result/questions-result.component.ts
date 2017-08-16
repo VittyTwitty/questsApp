@@ -12,6 +12,7 @@ import { Subscription } from "rxjs/Subscription";
 })
 
 export class QuestionsResultComponent implements OnInit {
+    sub2: Subscription;
     sub: Subscription;
     uid: any;
     public answers: number[];
@@ -33,6 +34,10 @@ export class QuestionsResultComponent implements OnInit {
             .subscribe(res => {
                 this.uid = res;
             });
+        this.sub2 = this.userService.getUserMap()
+            .subscribe(res => {
+                this.user = res;
+            })
 
     }
 
@@ -41,8 +46,15 @@ export class QuestionsResultComponent implements OnInit {
         console.log(this.answers);
 
         this.finallyResult();
-        this.setUser()
+        this.setUser();
 
+        this.thisUser()
+
+    }
+
+
+    thisUser() {
+        console.log(this.user)
     }
 
     finallyResult() {
@@ -74,5 +86,6 @@ export class QuestionsResultComponent implements OnInit {
 
     public ngOnDestroy() {
         this.sub.unsubscribe();
+        this.sub2.unsubscribe();
     }
 }
