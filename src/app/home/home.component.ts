@@ -20,17 +20,18 @@ export class HomeComponent implements OnInit, OnDestroy {
         public authService: AuthService
     ) {
 
-        this.sub = this.authService.authListener()
-            .subscribe(
-            (data) => {
-                this.loggedInUser = data;
 
-            });
     }
 
     ngOnInit() {
-        this.user = this.userService.getUser();
-        (this.user) ? this.loggedInUser = true : this.loggedInUser = false;
+        this.sub = this.authService.authListener()
+            .subscribe(
+            (data) => {
+                this.user = this.userService.getUser();
+                (this.user) ? this.loggedInUser = true : this.loggedInUser = false;
+
+            });
+
     }
 
     public ngOnDestroy() {

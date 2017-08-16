@@ -21,19 +21,27 @@ export class HeaderComponent implements OnInit, OnDestroy {
         private authService: AuthService,
         private router: Router
     ) {
+
+    }
+    qwe() {
+        console.log(this.user = this.userService.getUser());
+    }
+
+    ngOnInit() {
         this.sub = this.authService.authListener()
             .subscribe(
             (data) => {
-                this.loggedInUser = data;
+                this.setData()
 
             });
     }
 
-    ngOnInit() {
+    private setData() {
         this.user = this.userService.getUser();
         this.loggedInUser = (this.user) ? true : false;
         console.log('this.loggedInUser', this.loggedInUser)
         console.log('this.userOnl', this.user)
+
     }
 
     logOut() {

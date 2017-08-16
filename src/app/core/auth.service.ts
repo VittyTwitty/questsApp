@@ -11,6 +11,7 @@ import { AngularFireDatabase } from "angularfire2/database";
 import { LocalStorageService } from "./local-storage.service";
 import { UserService } from "./user.service";
 import 'rxjs/add/operator/toPromise';
+import { UserAuth } from "./auth-user.model";
 
 
 @Injectable()
@@ -37,11 +38,15 @@ export class AuthService {
 
     }
 
-    public addUserInfoFromForm(uid, email: string, name: string, password: string) {
+    public addUserInfoFromForm(uid,
+        email: string,
+        name: string,
+        password: string,
+    ) {
         return this.afd.object('q-users/' + uid).set({
             email: email,
             name: name,
-            password: password,
+            password: password
 
         })
     }
@@ -50,8 +55,10 @@ export class AuthService {
             .auth
             .signInWithEmailAndPassword(email, password)
             .then(user => {
-                this.lSService.user = user;
-                this.isLoggedIn = true;
+                if (user.uid) {
+                    this.userService.currentUid = user.id;
+                    return this.fromDbUserInfoFromForm(user.uid);
+                }
             })
             .catch(error => {
                 alert('Idi regaysia');
@@ -63,12 +70,14 @@ export class AuthService {
     public fromDbUserInfoFromForm(uid) {
         return this.afd.object('q-users/' + uid)
             .map(res => {
-                let prof = res;
+                this.isLoggedIn = true;
+                let prof: UserAuth = new UserAuth(res);
+                console.log(prof);
+                this.lSService.user = prof;
+                this.signInListener();
                 return prof;
-
-            }).toPromise();
+            })
     }
-
 
     public logout() {
         return this.afa

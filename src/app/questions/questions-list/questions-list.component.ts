@@ -80,26 +80,14 @@ export class QuestionsListComponent implements OnInit {
             radioId = +element.id.slice(6)
             if (element.checked) {
                 if (radioId == this.quest[this.ind].correct) {
-                    // console.log('Ответ верный', radioId);
                     this.coorectAnswersDone.push(this.quest[this.ind].correct);
-                    // console.log(this.coorectAnswersDone);
                 } else {
                     this.coorectAnswersDone.push(0);
-                    // console.log('Ответ неверный', radioId);
+                    
                 }
             }
         });
     }
-
-    // public addDisabledButton() {
-    //     this.radio.forEach(element => {
-    //             console.log('sdsd')
-    //         if (element.checked === false) {
-    //             this.button.disabled = true;
-    //             console.log('sdsd')
-    //         }
-    //     });
-    // }
 
     nextAnswer() {
         if (this.ind < this.maxId()) {
@@ -110,9 +98,7 @@ export class QuestionsListComponent implements OnInit {
         } else {
             this.correctAnswerOrNo();
             this.ind++;
-            console.log(this.maxId())
-
-
+            console.log(this.maxId());
 
             for (let i = 0; i < this.coorectAnswersDone.length; i++) {
                 if (this.coorectAnswersDone[i] == 1) {
@@ -144,7 +130,7 @@ export class QuestionsListComponent implements OnInit {
     }
 
     public ngOnDestroy() {
-        // this.sub.unsubscribe();
+        
     }
 
 

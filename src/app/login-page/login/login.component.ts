@@ -38,10 +38,11 @@ export class LoginComponent implements OnInit {
         $event.preventDefault();
         this.authService.login(myForm.email, myForm.password)
             .then((user) => {
-                console.log(user);
-                this.authService.fromDbUserInfoFromForm(user.uid).then(res => {
+                user.subscribe(res => {
                     console.log(res)
                 })
+                console.log(user);
+                
                 this.router.navigate(['/']);
                 //     .subscribe((res2) => {
                 //         console.log('res2', res2)

@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedService } from "../../shared/services/shared.service";
+import { UserService } from "../../core/user.service";
+import { AuthService } from "../../core/auth.service"
+import { AngularFireDatabase } from "angularfire2/database";
+import { Subscription } from "rxjs/Subscription";
 
 @Component({
     selector: 'q-question-result',
@@ -8,19 +12,37 @@ import { SharedService } from "../../shared/services/shared.service";
 })
 
 export class QuestionsResultComponent implements OnInit {
+    sub: Subscription;
+    uid: any;
     public answers: number[];
     public trueAnswer;
     public falseAnswer;
+    public user;
+    user2;
 
-    constructor(private data: SharedService) {
+    constructor(
+        private data: SharedService,
+        private userService: UserService,
+        private authService: AuthService,
+        public afd: AngularFireDatabase,
+    ) {
         this.trueAnswer = 0;
         this.falseAnswer = 0;
+
+        this.sub = this.userService.updateCurrentUid()
+            .subscribe(res => {
+                this.uid = res;
+            });
+
     }
 
     ngOnInit() {
         this.answers = this.data.trueAnswers;
         console.log(this.answers);
-        this.finallyResult()
+
+        this.finallyResult();
+        this.setUser()
+
     }
 
     finallyResult() {
@@ -30,29 +52,27 @@ export class QuestionsResultComponent implements OnInit {
             } else {
                 this.falseAnswer++;
             }
-            console.log(this.trueAnswer, this.falseAnswer)
         }
     }
 
-    // private barChartOptions: any = {
-    //     scaleShowVerticalLines: false,
-    //     responsive: true
-    // };
-    // private barChartLabels: string[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
-    // private barChartType: string = 'bar';
-    // private barChartLegend: boolean = true;
+    setUser() {
+        this.userService.addUserBestAns(this.uid).set({
+            countOfTests: '1',
+            bestCorrectlyAnswer: this.trueAnswer,
+            bestNocorrectlyAnswer: this.falseAnswer
+        })
+    }
 
-    // private barChartData: any[] = [
-    //     { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-    //     { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
-    // ];
 
-    // // events
-    // private chartClicked(e: any): void {
-    //     console.log(e);
-    // }
+    public smallerBigest(pervios, next) {
+        if (pervios < next) {
+            return next;
+        } else {
+            return pervios;
+        }
+    }
 
-    // private chartHovered(e: any): void {
-    //     console.log(e);
-    // }
+    public ngOnDestroy() {
+        this.sub.unsubscribe();
+    }
 }
