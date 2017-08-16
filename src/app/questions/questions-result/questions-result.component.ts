@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SharedService } from "../../shared/services/shared.service";
 import { UserService } from "../../core/user.service";
 import { AuthService } from "../../core/auth.service"
@@ -11,7 +11,8 @@ import { Subscription } from "rxjs/Subscription";
     styleUrls: ['questions-result.component.scss']
 })
 
-export class QuestionsResultComponent implements OnInit {
+export class QuestionsResultComponent implements OnInit, OnDestroy {
+    currentUserAnswers: any;
     sub2: Subscription;
     sub: Subscription;
     uid: any;
@@ -20,6 +21,7 @@ export class QuestionsResultComponent implements OnInit {
     public falseAnswer;
     public user;
     user2;
+    public counter;
 
     constructor(
         private data: SharedService,
@@ -30,32 +32,49 @@ export class QuestionsResultComponent implements OnInit {
         this.trueAnswer = 0;
         this.falseAnswer = 0;
 
-        this.sub = this.userService.updateCurrentUid()
-            .subscribe(res => {
-                this.uid = res;
+        // this.sub = this.userService.updateCurrentUid()
+        //     .subscribe(res => {
+        //         this.uid = res;
+        //         console.log(this.uid)
+        //     });
+        this.sub = this.authService.authListener()
+            .subscribe(
+            (data) => {
+                console.log(data, 'data')
+                this.user = this.userService.getUser();
+                this.uid = this.user.uid;
             });
         this.sub2 = this.userService.getUserMap()
             .subscribe(res => {
-                this.user = res;
+                res.forEach(element => {
+                    if (element.$key == this.user.uid) {
+
+                        this.currentUserAnswers = element.tests;
+                        this.counter = this.currentUserAnswers.countOfTests;
+
+                        this.setUser(this.trueAnswer, this.falseAnswer);
+                        console.log(this.currentUserAnswers)
+                    }
+                });
             })
 
     }
 
     ngOnInit() {
+        // this.sub2 = this.userService.getUserMap()
+        //     .subscribe(res => {
+        //         this.user = res;
+        //     })
         this.answers = this.data.trueAnswers;
-        console.log(this.answers);
 
+        // this.counter = this.currentUserAnswers.countOfTests;
         this.finallyResult();
-        this.setUser();
 
-        this.thisUser()
+
 
     }
 
 
-    thisUser() {
-        console.log(this.user)
-    }
 
     finallyResult() {
         for (let i = 0; i < this.answers.length; i++) {
@@ -65,16 +84,40 @@ export class QuestionsResultComponent implements OnInit {
                 this.falseAnswer++;
             }
         }
+
     }
 
-    setUser() {
+    setUser(trueA, falseA) {
+        if (this.currentUserAnswers.bestCorrectlyAnswer <= trueA) {
+            trueA = trueA;
+
+        } else {
+            trueA = this.currentUserAnswers.bestCorrectlyAnswer;
+        }
+        if (this.currentUserAnswers.bestNocorrectlyAnswer <= falseA) {
+            falseA = falseA;
+
+        } else {
+            falseA = this.currentUserAnswers.bestNocorrectlyAnswer;
+        }
+
+
+
+
+
+
+
         this.userService.addUserBestAns(this.uid).set({
-            countOfTests: '1',
-            bestCorrectlyAnswer: this.trueAnswer,
-            bestNocorrectlyAnswer: this.falseAnswer
+            countOfTests: this.counterMeth(this.counter),
+            bestCorrectlyAnswer: trueA,
+            bestNocorrectlyAnswer: falseA
         })
     }
 
+    public counterMeth(count) {
+        let c = count;
+        return c++;
+    }
 
     public smallerBigest(pervios, next) {
         if (pervios < next) {

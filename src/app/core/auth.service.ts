@@ -46,7 +46,8 @@ export class AuthService {
         return this.afd.object('q-users/' + uid).set({
             email: email,
             name: name,
-            password: password
+            password: password,
+            uid: uid
 
         })
     }
@@ -56,7 +57,7 @@ export class AuthService {
             .signInWithEmailAndPassword(email, password)
             .then(user => {
                 if (user.uid) {
-                    this.userService.currentUid = user.id;
+                    // this.userService.currentUid = user.id;
                     return this.fromDbUserInfoFromForm(user.uid);
                 }
             })

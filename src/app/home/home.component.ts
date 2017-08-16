@@ -10,6 +10,8 @@ import { Subscription } from "rxjs/Subscription";
 })
 
 export class HomeComponent implements OnInit, OnDestroy {
+    userAnswers: any;
+    sub2: Subscription;
     userOnl: any;
     public user: any;
     public sub: Subscription;
@@ -29,12 +31,24 @@ export class HomeComponent implements OnInit, OnDestroy {
             (data) => {
                 this.user = this.userService.getUser();
                 (this.user) ? this.loggedInUser = true : this.loggedInUser = false;
-
+                
             });
+
+
+        this.sub2 = this.userService.getUserMap()
+            .subscribe(res => {
+                res.forEach(element => {
+                    if(element.$key == this.user.uid) {
+                        this.userAnswers = element;
+                        console.log(this.userAnswers)
+                    }
+                });
+            })
 
     }
 
     public ngOnDestroy() {
         this.sub.unsubscribe();
+        this.sub2.unsubscribe();
     }
 }

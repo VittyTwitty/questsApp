@@ -10,7 +10,7 @@ import { of } from 'rxjs/observable/of';
 @Injectable()
 export class UserService {
     currentUser: any;
-    public currentUid: any;
+    // public currentUid: any;
     constructor(
         private lsService: LocalStorageService,
         public af: AngularFireDatabase,
@@ -30,23 +30,23 @@ export class UserService {
         return this.af.object(`q-users/${uid}/tests`)
     }
 
-    public updateCurrentUid() {
-        if (!this.currentUid) {
-            let us = this.lsService.user;
+    // public updateCurrentUid() {
+    //     if (!this.currentUid) {
+    //         let us = this.lsService.user;
 
-            return this.getListUsers().map(res => {
-                res.forEach(element => {
-                    if (us.email == element.email) {
-                        this.currentUid = element.$key;
-                    }
-                });
-                return this.currentUid;
-            })
-        } else {
-            return Observable.of(this.currentUid);
-            // return Observable.throw(this.currentUid);
-        }
-    }
+    //         return this.getListUsers().map(res => {
+    //             res.forEach(element => {
+    //                 if (us.email == element.email) {
+    //                     this.currentUid = element.$key;
+    //                 }
+    //             });
+    //             return this.currentUid;
+    //         })
+    //     } else {
+    //         return Observable.of(this.currentUid);
+    //         // return Observable.throw(this.currentUid);
+    //     }
+    // }
 
     getUserMap() {
         return this.af.list('/q-users').map(res => {
