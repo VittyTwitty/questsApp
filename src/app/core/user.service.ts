@@ -62,6 +62,13 @@ export class UserService {
         })
     }
 
+    getListUsersRole(uid) {
+        return this.af.object(`q-users/${uid}/role`).map(res => {
+            let c = res;
+            return c;
+        });
+    }
+
 
 
 }

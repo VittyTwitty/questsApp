@@ -51,6 +51,7 @@ import { ValidationPatternsService } from "./shared/services/validation-patterns
 import { AdminModule } from "./admin/admin.module";
 import { TrueAnswersResolver } from "./shared/services/true-anwsers.resolver";
 import { CountService } from "./shared/services/count.service";
+import { RoleGuard } from "./core/role-guard.service";
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -105,6 +106,7 @@ export const firebaseConfig = {
     AuthService,
     LocalStorageService,
     AuthGuard,
+    RoleGuard,
     UserService,
     SharedService,
     ValidationPatternsService,

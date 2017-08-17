@@ -63,7 +63,6 @@ export class QuestionsResultComponent implements OnInit, OnDestroy {
         this.answers = this.data.trueAnswers;
         this.counterTests = this.data.counter;
 
-        // this.counter = this.currentUserAnswers.countOfTests;
         this.finallyResult();
 
 
