@@ -3,7 +3,7 @@
 
 <section class="s-admin">
     <div class="grid" data-grid="center">
-        <div class="grid__item" data-grid="8/12"> Количество пользователей: 12 </div>
+        <div class="grid__item" data-grid="8/12"> Количество пользователей: {{usersLength}} </div>
         <div class="grid__item" data-grid="8/12">
             <div class="grid" data-grid="center">
 
@@ -20,18 +20,18 @@
                     <div class="grid__item" data-grid="4/12">
                         <div class="s-admin-best">
                             <div>Лучшая оценка</div>
-                            <div>1</div>
+                            <div>{{adminUsersBestAnswer}}</div>
                         </div>
                     </div>
                     <div class="grid__item" data-grid="4/12">
                         <div class="s-admin-easy">
-                            <div>Самые лёгкие вопросы</div>
+                            <div>Самый простой вопрос</div>
                             <div>{{easyQuestion}}</div>
                         </div>
                     </div>
                     <div class="grid__item" data-grid="4/12">
                         <div class="s-admin-hard">
-                            <div>Самые сложные вопросы</div>
+                            <div>Самый сложный вопрос</div>
                             <div>{{hardQuestion}}</div>
                         </div>
                     </div>

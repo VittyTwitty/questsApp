@@ -47,7 +47,12 @@ export class AuthService {
             email: email,
             name: name,
             password: password,
-            uid: uid
+            uid: uid,
+            tests: {
+                countOfTests: 0,
+                bestCorrectlyAnswer: 0,
+                bestNocorrectlyAnswer: 0
+            }
 
         })
     }
@@ -57,7 +62,6 @@ export class AuthService {
             .signInWithEmailAndPassword(email, password)
             .then(user => {
                 if (user.uid) {
-                    // this.userService.currentUid = user.id;
                     return this.fromDbUserInfoFromForm(user.uid);
                 }
             })

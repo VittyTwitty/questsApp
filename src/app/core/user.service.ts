@@ -29,6 +29,13 @@ export class UserService {
     public addUserBestAns(uid) {
         return this.af.object(`q-users/${uid}/tests`)
     }
+    public updateUserCounter(uid) {
+        return this.af.object(`q-users/${uid}/tests`)
+            .map(res => {
+                console.log('res = ', res)
+                
+            })
+    }
 
     // public updateCurrentUid() {
     //     if (!this.currentUid) {

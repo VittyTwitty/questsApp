@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.sub = this.authService.authListener()
+        this.authService.authListener()
             .subscribe(
             (data) => {
                 this.setData()
@@ -54,7 +54,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
 
     public ngOnDestroy() {
-        this.sub.unsubscribe();
+        // this.sub.unsubscribe();
     }
 
 }

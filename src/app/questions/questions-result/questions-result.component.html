@@ -2,10 +2,10 @@
 <section class="s-question">
     <div class="grid" data-grid="center none">
         <div class="grid__item" data-grid="8/12">
-            <h2>Result</h2>
+            <h2>Result</h2>              
             <div>Верных ответов: {{trueAnswer}}</div>
             <div>Неверных ответов: {{falseAnswer}}</div>
-            <a class="s-question-onemore" routerLink="/question">Попробовать ещё...</a>
+            <a class="s-question-onemore" (click)="countAnswers()" routerLink="/question">Попробовать ещё...</a>
             <div style="display: block">
                 <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
                     [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>

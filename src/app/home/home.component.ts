@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserService } from "../core/user.service";
 import { AuthService } from "../core/auth.service";
 import { Subscription } from "rxjs/Subscription";
+import { SharedService } from "../shared/services/shared.service";
+import { CountService } from "../shared/services/count.service";
 
 @Component({
     selector: 'q-home',
@@ -19,7 +21,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     constructor(
         public userService: UserService,
-        public authService: AuthService
+        public authService: AuthService,
+        public countService: CountService
     ) {
 
 
@@ -31,19 +34,29 @@ export class HomeComponent implements OnInit, OnDestroy {
             (data) => {
                 this.user = this.userService.getUser();
                 (this.user) ? this.loggedInUser = true : this.loggedInUser = false;
-                
+
             });
 
 
         this.sub2 = this.userService.getUserMap()
             .subscribe(res => {
                 res.forEach(element => {
-                    if(element.$key == this.user.uid) {
-                        this.userAnswers = element;
-                        console.log(this.userAnswers)
+                    if (this.user) {
+                        if (element.$key == this.user.uid) {
+                            this.userAnswers = element;
+                            console.log(this.userAnswers);
+                        }
+
                     }
                 });
             })
+
+    }
+
+    counter() {
+        this.countService.count = this.userAnswers.tests.countOfTests;
+        this.countService.count++;
+        console.log(this.countService.count, 'this.countService.count')
 
     }
 

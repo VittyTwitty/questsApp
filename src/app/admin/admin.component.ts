@@ -11,10 +11,14 @@ import { User } from "../shared/models/user";
 })
 
 export class AdminComponent implements OnInit {
+    public arrayOfUsersBestAnsers: number[] = [];
+    public usersLength: number;
     public users: User[];
     public adminData;
     public easyQuestion;
     public hardQuestion;
+    public adminUsersLength: number;
+    public adminUsersBestAnswer: string;
     constructor(
         private questionService: QuestionService,
         private userService: UserService
@@ -32,13 +36,19 @@ export class AdminComponent implements OnInit {
                 ];
             });
 
-        this.userService.getListUsers()
-            .subscribe((res) => {
-                this.users = res;
-                console.log(this.users)
+        this.userService.getUserMap()
+            .subscribe((users) => {
+                users.forEach((element) => {
+                    console.log(element.tests.bestCorrectlyAnswer)
+                    this.arrayOfUsersBestAnsers.push(element.tests.bestCorrectlyAnswer);
+                });
+                this.adminUsersBestAnswer = this.getMaxNumber(this.arrayOfUsersBestAnsers);
+                this.usersLength = users.length;
             })
+    }
 
-
+    getMaxNumber(number) {
+        return Math.max.apply(null, number);
     }
 
     public barChartOptions: any = {

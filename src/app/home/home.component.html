@@ -6,11 +6,16 @@
             <div class="s-home_user">
                 <h3 *ngIf="loggedInUser">Hello, {{user?.name}}</h3>
                 <h3 *ngIf="!loggedInUser">Tests</h3>
-                <div class="s-home_user-description">
-                    <div> Наилучший результат - <b>{{userAnswers?.tests?.bestCorrectlyAnswer}}</b> верных ответов.</div> <br>
-                    <div> Наибольшее количество ошибок: <b>{{userAnswers?.tests?.bestNocorrectlyAnswer}}</b></div> <br> Lorem ipsum
-                    dolor sit amet, consectetur adipisicing elit. Error doloremque accusantium, minima ducimus ipsa aspernatur
-                    harum molestiae est sunt animi!
+                <div class="s-home_user-description" *ngIf="loggedInUser">
+                    <div> Лучшая оценка за тест: <b>{{userAnswers?.tests?.bestCorrectlyAnswer}}</b></div> <br>
+                    <div> Наибольшее количество ошибок: <b>{{userAnswers?.tests?.bestNocorrectlyAnswer}}</b></div> <br>
+                    <div> Попыток пройти тест: <b>{{userAnswers?.tests?.countOfTests}}</b></div> <br>
+
+                </div>
+                <div class="s-home_user-description" *ngIf="!loggedInUser">
+                    <div> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Pariatur nobis esse non eos, corporis nulla
+                        doloremque sit explicabo veritatis culpa.</div>
+
                 </div>
                 <div class="s-home_user-rating">
                     Lorem ipsum dolor.
@@ -21,7 +26,7 @@
         <div class="grid__item" data-grid="4/12">
             <div class="grid" data-grid="left none">
                 <div class="grid__item mgbt20" data-grid="6/12">
-                    <a routerLink="/question" class="s-home_test">
+                    <a routerLink="/question" (click)="counter()" class="s-home_test">
                         <div class="s-home_test-img">
                             <img src="../../assets/img/stats.png" alt="">
                         </div>

@@ -4,6 +4,7 @@ import { UserService } from "../../core/user.service";
 import { AuthService } from "../../core/auth.service"
 import { AngularFireDatabase } from "angularfire2/database";
 import { Subscription } from "rxjs/Subscription";
+import { CountService } from "../../shared/services/count.service";
 
 @Component({
     selector: 'q-question-result',
@@ -12,6 +13,8 @@ import { Subscription } from "rxjs/Subscription";
 })
 
 export class QuestionsResultComponent implements OnInit, OnDestroy {
+    public counterTests: number;
+    count: any;
     currentUserAnswers: any;
     sub2: Subscription;
     sub: Subscription;
@@ -21,22 +24,17 @@ export class QuestionsResultComponent implements OnInit, OnDestroy {
     public falseAnswer;
     public user;
     user2;
-    public counter;
 
     constructor(
         private data: SharedService,
         private userService: UserService,
         private authService: AuthService,
         public afd: AngularFireDatabase,
+        private countService: CountService
     ) {
         this.trueAnswer = 0;
         this.falseAnswer = 0;
 
-        // this.sub = this.userService.updateCurrentUid()
-        //     .subscribe(res => {
-        //         this.uid = res;
-        //         console.log(this.uid)
-        //     });
         this.sub = this.authService.authListener()
             .subscribe(
             (data) => {
@@ -50,7 +48,7 @@ export class QuestionsResultComponent implements OnInit, OnDestroy {
                     if (element.$key == this.user.uid) {
 
                         this.currentUserAnswers = element.tests;
-                        this.counter = this.currentUserAnswers.countOfTests;
+
 
                         this.setUser(this.trueAnswer, this.falseAnswer);
                         console.log(this.currentUserAnswers)
@@ -61,11 +59,9 @@ export class QuestionsResultComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        // this.sub2 = this.userService.getUserMap()
-        //     .subscribe(res => {
-        //         this.user = res;
-        //     })
+
         this.answers = this.data.trueAnswers;
+        this.counterTests = this.data.counter;
 
         // this.counter = this.currentUserAnswers.countOfTests;
         this.finallyResult();
@@ -88,36 +84,34 @@ export class QuestionsResultComponent implements OnInit, OnDestroy {
     }
 
     setUser(trueA, falseA) {
-        if (this.currentUserAnswers.bestCorrectlyAnswer <= trueA) {
-            trueA = trueA;
-
-        } else {
+        if (this.currentUserAnswers.bestCorrectlyAnswer > trueA) {
             trueA = this.currentUserAnswers.bestCorrectlyAnswer;
-        }
-        if (this.currentUserAnswers.bestNocorrectlyAnswer <= falseA) {
-            falseA = falseA;
 
         } else {
+            trueA = trueA;
+        }
+        if (this.currentUserAnswers.bestNocorrectlyAnswer > falseA) {
             falseA = this.currentUserAnswers.bestNocorrectlyAnswer;
+
+        } else {
+            falseA = falseA;
         }
 
 
-
-
-
-
-
-        this.userService.addUserBestAns(this.uid).set({
-            countOfTests: this.counterMeth(this.counter),
+        this.userService.addUserBestAns(this.uid).update({
+            countOfTests: this.countService.count,
             bestCorrectlyAnswer: trueA,
             bestNocorrectlyAnswer: falseA
         })
     }
 
-    public counterMeth(count) {
-        let c = count;
-        return c++;
+    countAnswers() {
+        this.countService.count = this.currentUserAnswers.countOfTests;
+        this.countService.count++;
+
     }
+
+
 
     public smallerBigest(pervios, next) {
         if (pervios < next) {

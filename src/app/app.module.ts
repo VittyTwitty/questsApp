@@ -50,6 +50,7 @@ import 'chart.js';
 import { ValidationPatternsService } from "./shared/services/validation-patterns.service";
 import { AdminModule } from "./admin/admin.module";
 import { TrueAnswersResolver } from "./shared/services/true-anwsers.resolver";
+import { CountService } from "./shared/services/count.service";
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -107,7 +108,8 @@ export const firebaseConfig = {
     UserService,
     SharedService,
     ValidationPatternsService,
-    TrueAnswersResolver
+    TrueAnswersResolver,
+    CountService
   ]
 })
 export class AppModule {
