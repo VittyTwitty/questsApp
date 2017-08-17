@@ -9,7 +9,7 @@ export const questionsRoutes: Routes = [
     {
         path: 'question',
         component: QuestionsListComponent,
-        canActivate: [AuthGuard],
+        // canActivate: [AuthGuard],
     },
     {
         path: 'result',

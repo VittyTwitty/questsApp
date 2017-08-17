@@ -1,7 +1,11 @@
 .s-admin{
+
     &-header {
         width: 100%;
         text-align: center;
+    }
+    &-header-count {
+        margin-top: 20px;
     }
     &-body {
         text-align: center;
@@ -13,5 +17,15 @@
         div {
             margin-bottom: 20px;
         }
+    }
+    .spinner {
+        display: flex;
+        align-self: center;
+        margin-top: 100px;
+    }
+    &-charts {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
     }
 }

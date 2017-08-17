@@ -6,6 +6,7 @@ import { RouterModule } from "@angular/router";
 import { FooterComponent } from "./footer/footer";
 import { HeaderComponent } from "./header/header";
 import { AuthService } from "../core/auth.service";
+import { SpinnerComponent } from "./spinner/spinner.component";
 
 @NgModule({
 
@@ -16,11 +17,13 @@ import { AuthService } from "../core/auth.service";
     ],
     exports: [
         HeaderComponent,
-        FooterComponent
+        FooterComponent,
+        SpinnerComponent
     ],
     declarations: [
         HeaderComponent,
-        FooterComponent
+        FooterComponent,
+        SpinnerComponent
     ],
     providers: [
         AuthService,

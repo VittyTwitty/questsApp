@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { QuestionService } from "../shared/questions.service";
 import { UserService } from "../core/user.service";
 import { User } from "../shared/models/user";
+import { Subscription } from "rxjs/Subscription";
 
 
 @Component({
@@ -11,6 +12,7 @@ import { User } from "../shared/models/user";
 })
 
 export class AdminComponent implements OnInit {
+    items: any;
     public arrayOfUsersBestAnsers: number[] = [];
     public usersLength: number;
     public users: User[];
@@ -19,22 +21,26 @@ export class AdminComponent implements OnInit {
     public hardQuestion;
     public adminUsersLength: number;
     public adminUsersBestAnswer: string;
+
+    showSpinner: boolean = true
+
     constructor(
         private questionService: QuestionService,
         private userService: UserService
     ) { }
 
     ngOnInit() {
-        this.questionService.getQuestionInfoFromForm()
-            .subscribe(data => {
-                this.adminData = this.calculateCharData(data);
-                this.easyQuestion = this.getMaxOfArray(this.adminData.correctly);
-                this.hardQuestion = this.getMaxOfArray(this.adminData.nocorrectly);
-                this.barChartData = [
-                    { data: this.adminData.nocorrectly, label: 'Неверные ответы' },
-                    { data: this.adminData.correctly, label: 'Верные ответы' }
-                ];
-            });
+        this.items = this.questionService.getQuestionInfoFromForm();
+        this.items.subscribe(data => {
+            this.adminData = this.calculateCharData(data);
+            this.easyQuestion = this.getMaxOfArray(this.adminData.correctly);
+            this.hardQuestion = this.getMaxOfArray(this.adminData.nocorrectly);
+            this.barChartData = [
+                { data: this.adminData.nocorrectly, label: 'Неверные ответы' },
+                { data: this.adminData.correctly, label: 'Верные ответы' }
+            ];
+            this.showSpinner = false
+        });
 
         this.userService.getUserMap()
             .subscribe((users) => {

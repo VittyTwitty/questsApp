@@ -33,19 +33,21 @@ export class RoleGuard implements CanActivate {
     }
 
     public checkLogin(url: string): boolean {
-        if (this.user) {
-            this.authService.authListener()
-                .subscribe(
-                (data) => {
-                    this.user = this.userService.getUser();
-                    this.r = this.user.uid;
-                });
+        // if (this.user) {
+        this.authService.authListener()
+            .subscribe(
+            (data) => {
+                this.user = this.userService.getUser();
+                this.r = this.user.uid;
+                console.log(this.r)
+            });
 
-        }
+        // }
 
 
-        console.log(this.r)
+        console.log('this.userthis.userthis.user', this.user)
         if (this.r == 'kQvVa3wF3VPJg2SVolGQsOOiHwy1') {
+            console.log('this.r', this.r)
             return true;
         } else {
             this.router.navigate(['/']);

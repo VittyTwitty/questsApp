@@ -36,4 +36,8 @@ export class QuestionService {
         })
     }
 
+    public getSnapshotQuestionInfoFromForm() {
+        return this.af.list('q-answers/');
+    }
+
 }

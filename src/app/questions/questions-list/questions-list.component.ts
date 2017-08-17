@@ -17,6 +17,8 @@ import { SharedService } from "../../shared/services/shared.service";
 })
 
 export class QuestionsListComponent implements OnInit {
+    q: any;
+    items: any;
     answerThis: any[] = [];
     public quest: Questions[];
     // public sub: Subscription;
@@ -45,8 +47,22 @@ export class QuestionsListComponent implements OnInit {
 
         this.questionService.getQuestionInfoFromForm().subscribe(res => {
             this.answerThis = res;
-        })
-        console.log(this.answerThis)
+        });
+
+        this.items = this.questionService.getSnapshotQuestionInfoFromForm();
+        this.items
+            .subscribe(snapshots => {
+                snapshots.forEach(snapshot => {
+                    this.q = snapshot;
+                    this.qQ()
+                });
+            })
+        // console.log('this.items------------------------', this.items)
+
+        // console.log(this.answerThis)
+    }
+    qQ() {
+        return console.log('this.q------------------------', this.q)
     }
 
     public getQuestions() {
@@ -83,7 +99,7 @@ export class QuestionsListComponent implements OnInit {
                     this.coorectAnswersDone.push(this.quest[this.ind].correct);
                 } else {
                     this.coorectAnswersDone.push(0);
-                    
+
                 }
             }
         });
@@ -130,7 +146,7 @@ export class QuestionsListComponent implements OnInit {
     }
 
     public ngOnDestroy() {
-        
+
     }
 
 
