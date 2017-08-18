@@ -1,7 +1,7 @@
 <q-header></q-header>
 
 <section class="s-home">
-    <div class="grid" data-grid="center">
+    <div class="grid" data-grid="center none">
         <div class="grid__item" data-grid="4/12">
             <div class="s-home_user">
                 <h3 *ngIf="loggedInUser">Hello, {{user?.name}}</h3>
@@ -20,9 +20,10 @@
                 <div class="s-home_user-rating">
                     Lorem ipsum dolor.
                 </div>
+
+                <button class="go-admin" *ngIf="r" routerLink="/admin"> Перейти в админку</button>
             </div>
         </div>
-
         <div class="grid__item" data-grid="4/12">
             <div class="grid" data-grid="left none">
                 <div class="grid__item mgbt20" data-grid="6/12">
@@ -36,6 +37,8 @@
                         <div class="s-home_test-descr">
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure quaerat nam, ipsa.
                         </div>
+
+
                     </a>
                 </div>
                 <div class="grid__item mgbt20" data-grid="6/12">

@@ -12,6 +12,7 @@ import { CountService } from "../shared/services/count.service";
 })
 
 export class HomeComponent implements OnInit, OnDestroy {
+    r: boolean = false;
     userAnswers: any;
     sub2: Subscription;
     userOnl: any;
@@ -33,6 +34,11 @@ export class HomeComponent implements OnInit, OnDestroy {
             .subscribe(
             (data) => {
                 this.user = this.userService.getUser();
+                if (this.user.uid === 'kQvVa3wF3VPJg2SVolGQsOOiHwy1') {
+                    this.r = true;
+                } else {
+                    this.r = false;
+                }
                 (this.user) ? this.loggedInUser = true : this.loggedInUser = false;
 
             });
@@ -63,5 +69,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     public ngOnDestroy() {
         this.sub.unsubscribe();
         this.sub2.unsubscribe();
+    }
+
+    public adminId() {
+        return true;
     }
 }

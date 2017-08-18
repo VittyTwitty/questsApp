@@ -44,23 +44,11 @@ export class LoginComponent implements OnInit {
                 console.log(user);
                 
                 this.router.navigate(['/']);
-                //     .subscribe((res2) => {
-                //         console.log('res2', res2)
-                //         this.router.navigate(['/']);
-
-                //     })
+     
             })
             .catch((error) => {
 
             })
 
     }
-
-
-
-    // public loginUserGoogle($event) {
-    //     $event.preventDefault();
-    //     this.authService.loginGoogle();
-
-    // }
 }

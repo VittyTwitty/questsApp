@@ -21,7 +21,6 @@ export class QuestionsListComponent implements OnInit {
     items: any;
     answerThis: any[] = [];
     public quest: Questions[];
-    // public sub: Subscription;
     public questionId: number;
     public questionsId: number[] = [];
     public ind: number = 0;
@@ -30,6 +29,9 @@ export class QuestionsListComponent implements OnInit {
     public button: any;
     public correctAnswer: number;
     public coorectAnswersDone: number[] = [];
+
+    public flagTrue: boolean;
+
     constructor(
         private questionService: QuestionService,
         private router: Router,
@@ -40,6 +42,8 @@ export class QuestionsListComponent implements OnInit {
 
         this.radio = document.getElementsByName('radio');
         this.button = document.getElementsByClassName('s-question_submit');
+        this.flagTrue = true;
+        console.log(this.flagTrue)
 
     }
     ngOnInit() {
@@ -57,9 +61,8 @@ export class QuestionsListComponent implements OnInit {
                     this.qQ()
                 });
             })
-        // console.log('this.items------------------------', this.items)
 
-        // console.log(this.answerThis)
+       
     }
     qQ() {
         return console.log('this.q------------------------', this.q)
@@ -76,6 +79,11 @@ export class QuestionsListComponent implements OnInit {
             });
     }
 
+    toggleTrueFlag() {
+        this.flagTrue = false;
+        console.log(this.flagTrue)
+    }
+
     maxId(): number {
         let max: number;
         for (let i = 0; i <= this.quest.length; i++) {
@@ -84,8 +92,8 @@ export class QuestionsListComponent implements OnInit {
         return max - 1;
     }
 
-    public addUncheckedRadio() {
-        this.radio.forEach(element => {
+    public addUncheckedRadio(radio) {
+        radio.forEach(element => {
             element.checked = false;
         });
     }
@@ -95,6 +103,7 @@ export class QuestionsListComponent implements OnInit {
         this.radio.forEach((element, i) => {
             radioId = +element.id.slice(6)
             if (element.checked) {
+                
                 if (radioId == this.quest[this.ind].correct) {
                     this.coorectAnswersDone.push(this.quest[this.ind].correct);
                 } else {
@@ -105,11 +114,14 @@ export class QuestionsListComponent implements OnInit {
         });
     }
 
+
     nextAnswer() {
+        console.log(this.button);
         if (this.ind < this.maxId()) {
             this.correctAnswerOrNo();
             this.ind++;
-            this.addUncheckedRadio();
+            this.flagTrue = true;
+            this.addUncheckedRadio(this.radio);
             console.log(this.answerThis);
         } else {
             this.correctAnswerOrNo();

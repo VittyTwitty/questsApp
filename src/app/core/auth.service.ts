@@ -19,7 +19,7 @@ export class AuthService {
     public isLoggedIn = false;
     public redirectUrl: string;
     public subject = new BehaviorSubject(this.loggedIn());
-
+    UserAuth
     public user: Observable<firebase.User>;
     constructor(
         public afa: AngularFireAuth,

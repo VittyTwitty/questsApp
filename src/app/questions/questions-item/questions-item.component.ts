@@ -7,8 +7,8 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 
 export class QuestionsItemComponent implements OnInit {
-    // @Input() item;
-    // @Input() i;
+    @Input() item;
+    @Input() i;
     public mainAnswers: any;
     constructor() {
 
@@ -17,6 +17,7 @@ export class QuestionsItemComponent implements OnInit {
     }
 
     ngOnInit() {
+        console.log(this.i)
 
         // this.mainAnswers = this.item.answers
         // console.log(this.mainAnswers)
