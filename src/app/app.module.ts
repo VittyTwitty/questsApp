@@ -54,7 +54,8 @@ import { TrueAnswersResolver } from "./shared/services/true-anwsers.resolver";
 import { CountService } from "./shared/services/count.service";
 import { RoleGuard } from "./core/role-guard.service";
 import { QuestionGuard } from "./shared/question-guard";
-import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -89,6 +90,7 @@ export const firebaseConfig = {
   imports: [
     BrowserModule,
     FormsModule,
+    NgbModule,
     HttpModule,
     HomePageModule,
     AdminModule,
@@ -97,7 +99,6 @@ export const firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    NgbModule.forRoot(),
     RouterModule.forRoot(ROUTES, { preloadingStrategy: PreloadAllModules })
   ],
   /**

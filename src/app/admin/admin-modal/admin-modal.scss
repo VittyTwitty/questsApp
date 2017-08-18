@@ -1,0 +1,12 @@
+@import '../../../styles/_variables.scss';
+
+.btn-outline-primary {
+    border-color:  $main-color;
+    color: $main-color;
+    border-radius: 0;
+    cursor: pointer;
+    &:hover {
+        color: #fff;
+        background-color: $main-color;
+    }
+}

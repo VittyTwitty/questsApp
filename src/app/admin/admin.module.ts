@@ -6,7 +6,8 @@ import { RouterModule } from "@angular/router";
 import { adminRoutes } from "./admin.routing";
 import { SharedModule } from "../shared/shared.module";
 import { ChartsModule } from "ng2-charts";
-import { NgbdModalContent, NgbdModalComponent } from "./admin-modal/admin-modal";
+import { NgbdModalBasic } from "./admin-modal/admin-modal";
+import { NgbModalStack } from "@ng-bootstrap/ng-bootstrap/modal/modal-stack";
 
 @NgModule({
     imports: [
@@ -15,9 +16,15 @@ import { NgbdModalContent, NgbdModalComponent } from "./admin-modal/admin-modal"
         SharedModule,
         ChartsModule
     ],
-    exports: [],
-    entryComponents: [NgbdModalContent],
-    declarations: [AdminComponent, NgbdModalComponent, NgbdModalContent],
-    providers: [],
+    exports: [NgbdModalBasic],
+    entryComponents: [],
+    declarations: [
+        AdminComponent,
+        NgbdModalBasic
+    ],
+    providers: [
+        NgbdModalBasic,
+        NgbModalStack
+    ],
 })
 export class AdminModule { }
