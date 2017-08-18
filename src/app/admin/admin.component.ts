@@ -21,12 +21,11 @@ export class AdminComponent implements OnInit {
     public hardQuestion;
     public adminUsersLength: number;
     public adminUsersBestAnswer: string;
-
     showSpinner: boolean = true
 
     constructor(
         private questionService: QuestionService,
-        private userService: UserService
+        private userService: UserService,
     ) { }
 
     ngOnInit() {
@@ -51,6 +50,7 @@ export class AdminComponent implements OnInit {
                 this.adminUsersBestAnswer = this.getMaxNumber(this.arrayOfUsersBestAnsers);
                 this.usersLength = users.length;
             })
+
     }
 
     getMaxNumber(number) {
@@ -94,4 +94,5 @@ export class AdminComponent implements OnInit {
         let indexOfMax = numArray.indexOf(max)
         return indexOfMax + 1;
     }
+
 }

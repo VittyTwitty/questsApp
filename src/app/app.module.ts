@@ -46,6 +46,7 @@ import { LocalStorageService } from "./core/local-storage.service";
 import { UserService } from "./core/user.service";
 import { SharedService } from "./shared/services/shared.service";
 
+
 import 'chart.js';
 import { ValidationPatternsService } from "./shared/services/validation-patterns.service";
 import { AdminModule } from "./admin/admin.module";
@@ -53,6 +54,7 @@ import { TrueAnswersResolver } from "./shared/services/true-anwsers.resolver";
 import { CountService } from "./shared/services/count.service";
 import { RoleGuard } from "./core/role-guard.service";
 import { QuestionGuard } from "./shared/question-guard";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -95,6 +97,7 @@ export const firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    NgbModule.forRoot(),
     RouterModule.forRoot(ROUTES, { preloadingStrategy: PreloadAllModules })
   ],
   /**

@@ -34,12 +34,16 @@ export class HomeComponent implements OnInit, OnDestroy {
             .subscribe(
             (data) => {
                 this.user = this.userService.getUser();
-                if (this.user.uid === 'kQvVa3wF3VPJg2SVolGQsOOiHwy1') {
-                    this.r = true;
+                if (this.user) {
+                    this.loggedInUser = true;
+                    if (this.user.uid === 'kQvVa3wF3VPJg2SVolGQsOOiHwy1') {
+                        this.r = true;
+                    } else {
+                        this.r = false;
+                    }
                 } else {
-                    this.r = false;
+                    this.loggedInUser = false;
                 }
-                (this.user) ? this.loggedInUser = true : this.loggedInUser = false;
 
             });
 

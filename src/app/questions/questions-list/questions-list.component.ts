@@ -151,14 +151,11 @@ export class QuestionsListComponent implements OnInit {
             }
 
 
-
             this.router.navigate(['/result'])
         }
-
     }
 
     public ngOnDestroy() {
-
     }
 
 

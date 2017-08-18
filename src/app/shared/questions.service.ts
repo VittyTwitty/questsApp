@@ -18,7 +18,7 @@ export class QuestionService {
     };
 
     getQuestion() {
-        return this.af.list('/questions', {
+        return this.af.list('/questions/test_main', {
             query: {
                 limitToLast: 5
             }
