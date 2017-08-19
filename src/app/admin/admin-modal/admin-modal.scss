@@ -1,5 +1,6 @@
 @import '../../../styles/_variables.scss';
 
+@import "~bootstrap/dist/css/bootstrap.min.css";
 .btn-outline-primary {
     border-color:  $main-color;
     color: $main-color;

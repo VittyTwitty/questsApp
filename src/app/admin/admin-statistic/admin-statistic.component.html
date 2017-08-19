@@ -1,0 +1,60 @@
+<section class="s-admin-main">
+    <div class="grid" data-grid="center none">
+        <div class="grid__item" data-grid="8/12">
+            <div class="s-admin-header-count">
+                Количество пользователей: {{usersLength}}
+            </div>
+        </div>
+        <div class="grid__item" data-grid="8/12">
+            <div class="grid" data-grid="center">
+
+                <div class="grid__item" data-grid="6/12">
+                    <div class="s-admin-header">Общая статистика: </div>
+
+                </div>
+            </div>
+
+
+            <div class="s-admin-body">
+
+                <div class="grid" data-grid="center">
+
+                    <div class="grid__item" data-grid="4/12">
+                        <div class="s-admin-best">
+                            <div>Лучшая оценка</div>
+                            <div>{{adminUsersBestAnswer}}</div>
+                        </div>
+                    </div>
+                    <div class="grid__item" data-grid="4/12">
+                        <div class="s-admin-easy">
+                            <div>Самый простой вопрос</div>
+                            <div>{{easyQuestion}}</div>
+                        </div>
+                    </div>
+                    <div class="grid__item" data-grid="4/12">
+                        <div class="s-admin-hard">
+                            <div>Самый сложный вопрос</div>
+                            <div>{{hardQuestion}}</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="s-admin-charts">
+                <!-- *ngIf="showSpinner" -->
+                <q-spinner class="spinner" *ngIf="showSpinner"></q-spinner>
+
+                <div style="display: block">
+                    <canvas *ngIf="barChartData" baseChart [datasets]="barChartData" [labels]="barChartLabels" [colors]="barChartColor" [options]="barChartOptions"
+                        [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)"></canvas>
+                </div>
+
+            </div>
+
+            <ngbd-modal-basic></ngbd-modal-basic>
+
+
+        </div>
+    </div>
+</section>

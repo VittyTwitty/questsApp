@@ -1,33 +1,107 @@
-.s-admin{
-    padding-bottom: 70px;
+@import '../../styles/_variables.scss';
 
-    &-header {
-        width: 100%;
-        text-align: center;
+// header
+
+
+header {
+    width: 100%;
+    height: 40px;
+    background-color: $admin_main_color;
+    .header-grid {
+        height: 100%;
     }
-    &-header-count {
-        margin-top: 20px;
-    }
-    &-body {
-        text-align: center;
-        margin-top: 40px;
-    }
-    &-best,
-    &-easy,
-    &-hard {
-        div {
-            margin-bottom: 20px;
+    .header-look {
+        margin-left: 20px;
+        a{
+            font-size: 14px;
+            color: #617782;
+            &:hover {
+                color: #fff;
+            }
         }
     }
-    .spinner {
-        display: flex;
-        align-self: center;
-        margin-top: 100px;
+    .header-username {
+        float: right;
+        color: #fff;
+    }    
+    .header-logout {
+        height: 30px;
+        width: 30px;
+        cursor: pointer;
+        svg {
+            margin-left: 20px;
+            height: 100%;
+            width: 100%;
+        }
     }
-    &-charts {
+    .header-username-wrp {
         display: flex;
-        justify-content: center;
-        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+        padding-right: 20px;
+    }
+    .header-username-nolog {
+        float: right;
+        color: #617782;
+        a {
+            color: #fff;
+        }
     }
 }
+
+
+// s-admin-wrapper
+.s-admin-wrapper {
+    width: 100%;
+    height: calc(100% - 40px);
+    display: flex;
+}
+// s-admin-sidebar   
+
+.s-admin-sidebar {
+    width: 300px;
+    height: 100%;
+    background-color: $admin_main_color;
+    color: #fff;
+    
+}
+
+.s-admin-main-menu {
+    margin: 0;
+    ul {
+        padding: 20px 20px 0 20px;
+        margin: 0;
+    }
+    li {
+        list-style: none;
+        height: 40px;
+        line-height: 40px;
+        cursor: pointer;
+        &:hover {
+            background-color: #617782;
+        }
+        &+li {
+            border-top: 1px solid #324148;
+        }
+       
+        &:last-child {
+            // border-bottom: 1px solid #324148;
+        }
+        a {
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            padding: 0;
+            padding-left: 20px;
+            margin: 0;
+            line-height: 40px;
+            display: inline-block;
+            text-align: left;
+            &:hover {
+
+            }
+        }
+    }
+}
+// s-admin-main
 

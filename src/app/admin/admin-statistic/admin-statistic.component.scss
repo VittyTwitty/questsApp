@@ -1,0 +1,40 @@
+@import '../../../styles/_variables.scss';
+
+.s-admin{
+    padding-bottom: 70px;
+
+    &-header {
+        width: 100%;
+        text-align: center;
+    }
+    &-header-count {
+        margin-top: 20px;
+    }
+    &-body {
+        text-align: center;
+        margin-top: 40px;
+    }
+    &-best,
+    &-easy,
+    &-hard {
+        div {
+            margin-bottom: 20px;
+        }
+    }
+    .spinner {
+        display: flex;
+        align-self: center;
+        margin-top: 100px;
+    }
+    &-charts {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+}
+
+.s-admin-main {
+    width: 100%;
+    height: 100%;
+    background-color: $light_color;
+}
