@@ -1,32 +1,27 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {MdDialog} from '@angular/material';
 
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-    selector: 'ngbd-modal-basic',
-    templateUrl: './admin-modal.html',
-    styleUrls: ['./admin-modal.scss']
+  selector: 'dialog-overview-example',
+  templateUrl: 'dialog-overview-example.html',
 })
-export class NgbdModalBasic {
-    closeResult: string;
+export class DialogOverviewExample {
+  constructor(public dialog: MdDialog) {}
 
-    constructor(private modalService: NgbModal) { }
-
-    open(content) {
-        this.modalService.open(content).result.then((result) => {
-            this.closeResult = `Closed with: ${result}`;
-        }, (reason) => {
-            this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-        });
-    }
-
-    private getDismissReason(reason: any): string {
-        if (reason === ModalDismissReasons.ESC) {
-            return 'by pressing ESC';
-        } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-            return 'by clicking on a backdrop';
-        } else {
-            return `with: ${reason}`;
-        }
-    }
+  openDialog() {
+    this.dialog.open(DialogOverviewExampleDialog);
+  }
 }
+
+
+@Component({
+  selector: 'dialog-overview-example-dialog',
+  templateUrl: 'admin-modal.html',
+})
+export class DialogOverviewExampleDialog {}
+
+
+/**  Copyright 2017 Google Inc. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at http://angular.io/license */

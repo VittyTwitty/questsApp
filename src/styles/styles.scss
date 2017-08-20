@@ -3,11 +3,13 @@
 
 @import 'variables';
 @import 'before_styles';
+
 //libs
+
 @import 'radio';
 @import "~gridilydidily/gridilydidily.scss";
-
 @import "~normalize.css/normalize.css";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 nav {
   margin-top: 16px;

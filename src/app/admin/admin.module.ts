@@ -6,10 +6,16 @@ import { RouterModule } from "@angular/router";
 import { adminRoutes } from "./admin.routing";
 import { SharedModule } from "../shared/shared.module";
 import { ChartsModule } from "ng2-charts";
-import { NgbdModalBasic } from "./admin-modal/admin-modal";
-import { NgbModalStack } from "@ng-bootstrap/ng-bootstrap/modal/modal-stack";
+// import { NgbdModalBasic } from "./admin-modal/admin-modal";
+
 import { AdminStatisticComponent } from "./admin-statistic/admin-statistic.component";
 import { CreateTestsComponent } from "./create-tests/create-tests.component";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import {
+    MdDialogModule,
+    
+} from '@angular/material';
+import { DialogOverviewExampleDialog, DialogOverviewExample } from "./admin-modal/admin-modal";
 
 @NgModule({
     imports: [
@@ -17,21 +23,24 @@ import { CreateTestsComponent } from "./create-tests/create-tests.component";
         RouterModule.forChild(adminRoutes),
         SharedModule,
         ChartsModule,
-        
+        BrowserAnimationsModule,
+        MdDialogModule
+
     ],
     exports: [
-        NgbdModalBasic,
-        CreateTestsComponent
+        CreateTestsComponent,
+        MdDialogModule
+       
     ],
+    entryComponents: [DialogOverviewExample, DialogOverviewExampleDialog],
     declarations: [
         AdminComponent,
-        NgbdModalBasic,
         AdminStatisticComponent,
-        CreateTestsComponent
+        CreateTestsComponent,
+        DialogOverviewExampleDialog,
+        DialogOverviewExample,
     ],
     providers: [
-        NgbdModalBasic,
-        NgbModalStack
     ],
 })
 export class AdminModule { }

@@ -54,8 +54,9 @@ import { TrueAnswersResolver } from "./shared/services/true-anwsers.resolver";
 import { CountService } from "./shared/services/count.service";
 import { RoleGuard } from "./core/role-guard.service";
 import { QuestionGuard } from "./shared/question-guard";
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MdNativeDateModule } from "@angular/material";
+import { AddTestService } from "./shared/services/add-test.service";
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -90,7 +91,6 @@ export const firebaseConfig = {
   imports: [
     BrowserModule,
     FormsModule,
-    NgbModule,
     HttpModule,
     HomePageModule,
     AdminModule,
@@ -99,6 +99,7 @@ export const firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    MdNativeDateModule,
     RouterModule.forRoot(ROUTES, { preloadingStrategy: PreloadAllModules })
   ],
   /**
@@ -117,7 +118,8 @@ export const firebaseConfig = {
     SharedService,
     ValidationPatternsService,
     TrueAnswersResolver,
-    CountService
+    CountService,
+    AddTestService
   ]
 })
 export class AppModule {
