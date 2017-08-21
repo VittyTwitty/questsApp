@@ -3,5 +3,11 @@ export class AddTest {
     title: string;
     question: string;
     answers: string;
-    true: boolean = true;
+    q: boolean = true;
+    // constructor(data) {
+    //     this.$key = data.$key;
+    //     this.title = data.title;
+    //     this.question = data.question;
+    //     this.answers = data.answers;
+    // }
 }

@@ -1,4 +1,30 @@
 <section class="s-admin-main">
     <dialog-overview-example>Loading Material Docs example...</dialog-overview-example>
-    <button (click)="addQuestions()">Get Test</button>
+    <div class="s-admin-main_edit-test">
+        <div class="s-admin-main_edit-item" *ngFor="let item of tests">
+            {{item.name_test}}
+
+            <button (click)="deleteTest($event, item.$key)">Удалить</button>
+            <!-- <button (click)="updateQuestionsTest(item.$key, newitem.value)">Изменить тесты</button> -->
+
+            <div>
+                <form [formGroup]="updateForm" (submit)="updateQuestionsTest(item.$key, updateTests.value)" #updateTests="ngForm">
+                    <textarea type="text" formControlName='question' placeholder="Вопрос"></textarea>
+                    <input type="text" formControlName='answer' placeholder="Ответ">
+                    <!-- <input type="text" formControlName='correct' placeholder="Верный"> -->
+
+                    <button type="button" (click)=pushToAnswers(updateTests.value)>Ещё ответ</button>
+
+                    <button type="button" (click)=pushToNewQuestions(updateTests.value)>Следующий вопрос</button>
+
+                    <button type="submit">Изменить тесты</button>
+                </form>
+            </div>
+        </div>
+
+
+
+    </div>
+
+
 </section>

@@ -16,6 +16,7 @@ import {
     
 } from '@angular/material';
 import { DialogOverviewExampleDialog, DialogOverviewExample } from "./admin-modal/admin-modal";
+import { ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
     imports: [
@@ -24,7 +25,8 @@ import { DialogOverviewExampleDialog, DialogOverviewExample } from "./admin-moda
         SharedModule,
         ChartsModule,
         BrowserAnimationsModule,
-        MdDialogModule
+        MdDialogModule,
+        ReactiveFormsModule
 
     ],
     exports: [

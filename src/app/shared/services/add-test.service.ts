@@ -24,8 +24,14 @@ export class AddTestService {
 
 
 
-    addNewTest(item: any) {
-        this.tests.push(item)
-            .catch(error => console.log('ОШИБКА'))
+    addNewTest(nameTest: string) {
+        this.tests.push({ name_test: nameTest })
+            .catch(error => console.log('ОШИБКА'));
+    }
+    updateOneTest(key, obj: {}) {
+        this.tests.update(key,obj)
+    }
+    removeTest(key) {
+        this.tests.remove(key);
     }
 }

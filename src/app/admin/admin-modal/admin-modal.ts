@@ -1,5 +1,8 @@
-import {Component} from '@angular/core';
-import {MdDialog} from '@angular/material';
+import { Component, OnInit } from '@angular/core';
+import { MdDialog } from '@angular/material';
+import { FormGroup, FormControl } from "@angular/forms";
+import { AddTestService } from "../../shared/services/add-test.service";
+import { AddTest } from "../../shared/models/add-test";
 
 
 @Component({
@@ -7,7 +10,7 @@ import {MdDialog} from '@angular/material';
   templateUrl: 'dialog-overview-example.html',
 })
 export class DialogOverviewExample {
-  constructor(public dialog: MdDialog) {}
+  constructor(public dialog: MdDialog) { }
 
   openDialog() {
     this.dialog.open(DialogOverviewExampleDialog);
@@ -18,10 +21,41 @@ export class DialogOverviewExample {
 @Component({
   selector: 'dialog-overview-example-dialog',
   templateUrl: 'admin-modal.html',
+  styleUrls: ['admin-modal.scss'],
 })
-export class DialogOverviewExampleDialog {}
+export class DialogOverviewExampleDialog implements OnInit {
+  radioBtnChecked;
+  radioBtns: any;
+  radioValue: number;
+  test: AddTest = new AddTest();
+
+  private form = new FormGroup({
+    countOfAnswers: new FormControl('5'),
+    nameOfTest: new FormControl('')
+  });
 
 
-/**  Copyright 2017 Google Inc. All Rights Reserved.
-    Use of this source code is governed by an MIT-style license that
-    can be found in the LICENSE file at http://angular.io/license */
+  constructor(
+    private addTestService: AddTestService
+  ) {
+
+  }
+
+  ngOnInit() {
+    this.radioValue = +this.form.value.countOfAnswers;
+    console.log(this.radioValue);
+  }
+  getRadioValue(e) {
+    this.radioValue = +e.target.value;
+    console.log(this.radioValue);
+  }
+
+  // addQuestions() {
+  //   this.addTestService.addNewTest(this.test);
+  // }
+
+  addTestsSubmit($event, val) {
+    console.log($event, val);
+    this.addTestService.addNewTest(val.nameOfTest);
+  }
+}
