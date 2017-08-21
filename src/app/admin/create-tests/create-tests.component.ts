@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { AddTestService } from "../../shared/services/add-test.service";
 import { AddTest } from "../../shared/models/add-test";
 import { Subscription } from "rxjs/Subscription";
@@ -11,6 +11,9 @@ import { FormGroup, FormControl } from "@angular/forms";
 })
 
 export class CreateTestsComponent implements OnInit, OnDestroy {
+
+    @Input() item;
+    sub2: Subscription;
     megaTotal: any[] = [];
 
     sub: Subscription;
@@ -42,36 +45,31 @@ export class CreateTestsComponent implements OnInit, OnDestroy {
                 this.keys.push(el.$key);
                 this.testItem = el;
                 this.tests.push(this.testItem);
-                console.log(this.tests)
+                // console.log(this.tests)
             })
         })
 
+        
 
-        // this.addTestService.getOneTest(key).subscribe(res => {
-        //     console.log('odin vopros', res)
-        // })
+
     }
 
-    updateQuestionsTest(key: string, value) {
-        
-        this.addTestService.getOneTest(key).subscribe(res => {
-            console.log(res);
-        });
-        console.log(this.megaTotal)
-        // megaTotal.push(this.total)
-        // console.log(key, value)
-        // this.addTestService.updateOneTest(key, megaTotal
 
-            // answers: this.newArrayAnswers,                
-            // // correct: value.correct,
-            // question: this.questionFormForm,   
-        // );
+
+    updateQuestionsTest(ev, key: string, value) {
+        ev.preventDefault();
+        this.addTestService.getTests2(key);
+        this.addTestService.addTest({
+            answer: '111',
+            question: '2000'
+        });
+       
     }
 
     deleteTest(event, key) {
         this.keys.forEach(element => {
             if (element == key) {
-                console.log(element);
+                // console.log(element);
                 this.addTestService.removeTest(element);
             }
         });
@@ -80,19 +78,32 @@ export class CreateTestsComponent implements OnInit, OnDestroy {
     pushToNewQuestions(value) {
         this.questionFormForm = value.question;
 
-        this.total.push(this.newArrayAnswers);
-        this.total.push(this.questionFormForm);
-        console.log(this.newArrayQuestions)
+        // this.total.push(this.newArrayAnswers);
+        // this.total.push(this.questionFormForm);
+        // console.log(this.newArrayQuestions)
     }
 
     pushToAnswers(value) {
         this.newArrayAnswers.push(value.answer);
-        console.log(this.newArrayAnswers)
+        // console.log(this.newArrayAnswers)
     }
 
     ngOnDestroy() {
         this.sub.unsubscribe();
+        this.sub2.unsubscribe();
     }
 
 
 }
+
+
+
+// this.addTestService.updateOneTest(key, {
+    
+//                 answers: this.newArrayAnswers,
+//                 // // correct: value.correct,
+//                 question: this.questionFormForm,
+    
+//             }
+    
+//             );
