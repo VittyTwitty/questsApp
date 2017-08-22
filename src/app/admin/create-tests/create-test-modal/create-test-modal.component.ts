@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, Input, Inject } from '@angular/core';
 import { AddTestService } from "../../../shared/services/add-test.service";
 import { AddTest } from "../../../shared/models/add-test";
 import { Subscription } from "rxjs/Subscription";
-import { FormGroup, FormControl, FormArray } from "@angular/forms";
+import { FormGroup, FormControl, FormArray, FormBuilder } from "@angular/forms";
 import { MD_DIALOG_DATA } from '@angular/material';
 
 @Component({
@@ -23,6 +23,7 @@ export class CreateTestModalComponent implements OnInit, OnDestroy {
 
     constructor(
         private addTestService: AddTestService,
+        private fb: FormBuilder,
         @Inject(MD_DIALOG_DATA) public data: any
     ) { }
 
@@ -37,14 +38,32 @@ export class CreateTestModalComponent implements OnInit, OnDestroy {
             })
         });
     }
+    
     private updateForm = new FormGroup({
         question: new FormControl(''),
-        answer: new FormGroup({
-            answer_1: new FormControl(''),
-            answer_2: new FormControl(''),
-        }),
+        answers: this.fb.array([
+            this.fb.group({
+                answer: ''
+            }),
+            this.fb.group({
+                answer: ''
+            })
+        ]),
         correct: new FormControl('')
     });
+
+    setAnswers(a: any[]) {
+        const answersFGs = a.map(answers => this.fb.group(answers));
+        const answersFormArray = this.fb.array(answersFGs);
+        this.updateForm.setControl('answers', answersFormArray);
+    };
+    get answers(): FormArray {
+        return this.updateForm.get('answers') as FormArray;
+    };
+    addDynamicAnswerInForm() {
+        this.answers.push(this.fb.group({answer: ''}));
+        console.log(this.answers)
+    }
 
     updateQuestionsTest(ev, key: string, value) {
         ev.preventDefault();

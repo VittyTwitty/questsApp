@@ -1,16 +1,22 @@
 <form class="update-form" [formGroup]="updateForm" (submit)="updateQuestionsTest($event, data.$key, updateTests.value)" #updateTests="ngForm">
     <textarea type="text" formControlName='question' placeholder="Вопрос"></textarea>
     <div>Ответы</div>
-    <div formGroupName="answer" class="update-form_group-answer">
+    <!-- <div formGroupName="answer" class="update-form_group-answer">
         <input type="text"  formControlName='answer_1' placeholder="Ответ">
         <input type="text"  formControlName='answer_2' placeholder="Ответ">
 
-    </div>
+    </div> -->
     <!-- <input type="text" formControlName='correct' placeholder="Верный"> -->
-
+    <div formArrayName="answers" class="well well-lg">
+        <div *ngFor="let ans of answers.controls; let i=index" [formGroupName]="i">
+            <h4>Answer №{{i + 1}}</h4>
+           
+            <input type="text"  formControlName='answer' placeholder="Ответ">
+        </div>
+    </div>
+    <button (click)="addDynamicAnswerInForm()" type="button">Add a Secret Lair</button>
     <button type="button" (click)=pushToAnswers(updateTests.value)>Ещё ответ</button>
 
     <button type="button" (click)=pushToNewQuestions(updateTests.value)>Следующий вопрос</button>
-
     <button type="submit">Изменить тесты</button>
 </form>
