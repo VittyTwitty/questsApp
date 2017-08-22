@@ -1,0 +1,12 @@
+<div class="admin-add-tests">
+    <form [formGroup]="form" (submit)="addTestsSubmit($event, addTests.value)" #addTests="ngForm" class="admin-add-tests-body" novalidate>
+        <input type="text" formControlName=nameOfTest name=nameOfTest placeholder="Название теста">
+        <p>Form value: {{ form.value | json }}</p>
+        <p>Form status: {{ form.status | json }}</p>
+        <!-- <div class="form-control-feedback" *ngIf="password.errors && (password.dirty || password.touched)">
+            <p *ngIf="nameOfTest.errors.required">Password is required</p>
+            <p *ngIf="nameOfTest.errors.minlength">Password must be 8 characters long</p>
+          </div> -->
+        <button type="submit">Добавить тест</button>
+    </form>
+</div>

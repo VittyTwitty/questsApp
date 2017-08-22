@@ -12,7 +12,7 @@ import { FormGroup, FormControl } from "@angular/forms";
 
 export class CreateTestsComponent implements OnInit, OnDestroy {
 
-    @Input() item;
+
     sub2: Subscription;
     megaTotal: any[] = [];
 
@@ -32,11 +32,7 @@ export class CreateTestsComponent implements OnInit, OnDestroy {
     ) {
 
     }
-    private updateForm = new FormGroup({
-        question: new FormControl(''),
-        answer: new FormControl(''),
-        correct: new FormControl('')
-    });
+
 
     ngOnInit() {
         this.sub = this.addTestService.getTests().subscribe((res) => {
@@ -47,24 +43,12 @@ export class CreateTestsComponent implements OnInit, OnDestroy {
                 this.tests.push(this.testItem);
                 // console.log(this.tests)
             })
-        })
-
-        
-
-
+        })  
     }
 
 
 
-    updateQuestionsTest(ev, key: string, value) {
-        ev.preventDefault();
-        this.addTestService.getTests2(key);
-        this.addTestService.addTest({
-            answer: '111',
-            question: '2000'
-        });
-       
-    }
+   
 
     deleteTest(event, key) {
         this.keys.forEach(element => {
@@ -75,35 +59,8 @@ export class CreateTestsComponent implements OnInit, OnDestroy {
         });
     }
 
-    pushToNewQuestions(value) {
-        this.questionFormForm = value.question;
-
-        // this.total.push(this.newArrayAnswers);
-        // this.total.push(this.questionFormForm);
-        // console.log(this.newArrayQuestions)
-    }
-
-    pushToAnswers(value) {
-        this.newArrayAnswers.push(value.answer);
-        // console.log(this.newArrayAnswers)
-    }
 
     ngOnDestroy() {
         this.sub.unsubscribe();
-        this.sub2.unsubscribe();
     }
-
-
 }
-
-
-
-// this.addTestService.updateOneTest(key, {
-    
-//                 answers: this.newArrayAnswers,
-//                 // // correct: value.correct,
-//                 question: this.questionFormForm,
-    
-//             }
-    
-//             );

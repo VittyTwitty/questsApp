@@ -15,8 +15,8 @@ import {
     MdDialogModule,
     
 } from '@angular/material';
-import { DialogOverviewExampleDialog, DialogOverviewExample } from "./admin-modal/admin-modal";
 import { ReactiveFormsModule } from "@angular/forms";
+import { AdminSharedModule } from "./admin-shared/admin-shared.module";
 
 @NgModule({
     imports: [
@@ -26,7 +26,8 @@ import { ReactiveFormsModule } from "@angular/forms";
         ChartsModule,
         BrowserAnimationsModule,
         MdDialogModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        AdminSharedModule
 
     ],
     exports: [
@@ -34,13 +35,10 @@ import { ReactiveFormsModule } from "@angular/forms";
         MdDialogModule
        
     ],
-    entryComponents: [DialogOverviewExample, DialogOverviewExampleDialog],
     declarations: [
         AdminComponent,
         AdminStatisticComponent,
         CreateTestsComponent,
-        DialogOverviewExampleDialog,
-        DialogOverviewExample,
     ],
     providers: [
     ],
