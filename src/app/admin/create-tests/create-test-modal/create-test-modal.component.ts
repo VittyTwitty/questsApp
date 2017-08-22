@@ -2,8 +2,8 @@ import { Component, OnInit, OnDestroy, Input, Inject } from '@angular/core';
 import { AddTestService } from "../../../shared/services/add-test.service";
 import { AddTest } from "../../../shared/models/add-test";
 import { Subscription } from "rxjs/Subscription";
-import { FormGroup, FormControl } from "@angular/forms";
-import {MD_DIALOG_DATA} from '@angular/material';
+import { FormGroup, FormControl, FormArray } from "@angular/forms";
+import { MD_DIALOG_DATA } from '@angular/material';
 
 @Component({
     selector: 'create-test-modal.component',
@@ -39,7 +39,10 @@ export class CreateTestModalComponent implements OnInit, OnDestroy {
     }
     private updateForm = new FormGroup({
         question: new FormControl(''),
-        answer: new FormControl(''),
+        answer: new FormGroup({
+            answer_1: new FormControl(''),
+            answer_2: new FormControl(''),
+        }),
         correct: new FormControl('')
     });
 
@@ -47,8 +50,8 @@ export class CreateTestModalComponent implements OnInit, OnDestroy {
         ev.preventDefault();
         this.addTestService.getTests2(key);
         this.addTestService.addTest({
-            answer:  this.newArrayAnswers,
-            question: this.questionFormForm
+            answer: this.newArrayAnswers,
+            question: this.questionFormForm,
         });
 
     }
@@ -56,15 +59,26 @@ export class CreateTestModalComponent implements OnInit, OnDestroy {
 
     pushToNewQuestions(value) {
         this.questionFormForm = value.question;
-        console.log(this.data)
+        console.log(this.data);
+
+
+        this.newArrayAnswers = [];
+        for (let key in value.answer) {
+            console.log(value.answer[key]);
+            if (value.answer[key] != '') {
+                this.newArrayAnswers.push(value.answer[key])
+            }
+        }
         // this.total.push(this.newArrayAnswers);
         // this.total.push(this.questionFormForm);
         // console.log(this.newArrayQuestions)
     }
 
     pushToAnswers(value) {
-        this.newArrayAnswers.push(value.answer);
-        console.log('sdsd')
+        console.log(value);
+
+        // this.newArrayAnswers.push(value.answer);
+        // console.log(value.answer.getValue())
         // console.log(this.newArrayAnswers)
     }
     ngOnDestroy() {

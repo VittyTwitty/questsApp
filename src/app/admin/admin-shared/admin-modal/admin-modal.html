@@ -3,10 +3,13 @@
         <input type="text" formControlName=nameOfTest name=nameOfTest placeholder="Название теста">
         <p>Form value: {{ form.value | json }}</p>
         <p>Form status: {{ form.status | json }}</p>
+        <div class="alert_invalid" *ngIf="!form.controls['nameOfTest'].valid && (form.controls['nameOfTest'].touched || addTests.submitted)">
+            <p *ngIf="form.controls['nameOfTest'].hasError('required')">Input field required</p>
+        </div>
         <!-- <div class="form-control-feedback" *ngIf="password.errors && (password.dirty || password.touched)">
             <p *ngIf="nameOfTest.errors.required">Password is required</p>
             <p *ngIf="nameOfTest.errors.minlength">Password must be 8 characters long</p>
           </div> -->
-        <button type="submit">Добавить тест</button>
+        <button type="submit" [disabled]="!form.valid">Добавить тест</button>
     </form>
 </div>

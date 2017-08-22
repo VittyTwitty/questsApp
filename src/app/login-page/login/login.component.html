@@ -24,7 +24,7 @@
                     <p *ngIf="loginForm.controls['password'].hasError('maxlength')">The max password length is 30 characters</p>
                     <p *ngIf="loginForm.controls['password'].hasError('pattern')">Please enter numbers and letters</p>
                 </div>
-                <button class="login_form-button" type="submit">Login</button>
+                <button class="login_form-button" type="submit" >Login</button>
             </form>
             <div class="login_links">
                 <a [routerLink]="['/sign-up']" class="login_links-register">Register</a>
