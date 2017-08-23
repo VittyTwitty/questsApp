@@ -27,36 +27,36 @@ import { AppState, InternalStateType } from './app.service';
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
-import { HomePageModule } from "./home/home.module";
-import { QuestionsListComponent } from "./questions-list/questions-list.component";
-import { QuestionsItemComponent } from "./questions-item/questions-item.component";
+import { HomePageModule } from './home/home.module';
+import { QuestionsListComponent } from './questions-list/questions-list.component';
+import { QuestionsItemComponent } from './questions-item/questions-item.component';
 import { AngularFireModule } from 'angularfire2';
 
 // New imports to update based on AngularFire2 version 4
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
-import { QuestionService } from "./shared/questions.service";
-import { QuestionsResultComponent } from "./questions-result/questions-result.component";
-import { SharedModule } from "./shared/shared.module";
-import { QuestionModule } from "./questions/questions.module";
-import { AuthService } from "./core/auth.service";
-import { LoginPageModule } from "./login-page/login-page.module";
-import { AuthGuard } from "./core/auth-guard.service";
-import { LocalStorageService } from "./core/local-storage.service";
-import { UserService } from "./core/user.service";
-import { SharedService } from "./shared/services/shared.service";
+import { QuestionService } from './shared/questions.service';
+import { QuestionsResultComponent } from './questions-result/questions-result.component';
+import { SharedModule } from './shared/shared.module';
+import { QuestionModule } from './questions/questions.module';
+import { AuthService } from './core/auth.service';
+import { LoginPageModule } from './login-page/login-page.module';
+import { AuthGuard } from './core/auth-guard.service';
+import { LocalStorageService } from './core/local-storage.service';
+import { UserService } from './core/user.service';
+import { SharedService } from './shared/services/shared.service';
 
 
 import 'chart.js';
-import { ValidationPatternsService } from "./shared/services/validation-patterns.service";
-import { AdminModule } from "./admin/admin.module";
-import { TrueAnswersResolver } from "./shared/services/true-anwsers.resolver";
-import { CountService } from "./shared/services/count.service";
-import { RoleGuard } from "./core/role-guard.service";
-import { QuestionGuard } from "./shared/question-guard";
+import { ValidationPatternsService } from './shared/services/validation-patterns.service';
+import { AdminModule } from './admin/admin.module';
+import { TrueAnswersResolver } from './shared/services/true-anwsers.resolver';
+import { CountService } from './shared/services/count.service';
+import { RoleGuard } from './core/role-guard.service';
+import { QuestionGuard } from './shared/question-guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MdNativeDateModule } from "@angular/material";
-import { AddTestService } from "./shared/services/add-test.service";
+import { MdNativeDateModule } from '@angular/material';
+import { AddTestService } from './shared/services/add-test.service';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -70,12 +70,12 @@ type StoreType = {
   disposeOldHosts: () => void
 };
 export const firebaseConfig = {
-  apiKey: "AIzaSyB317U7_q357AO3NMeBmUznWLuEdWCf0wU",
-  authDomain: "quesinator-f7538.firebaseapp.com",
-  databaseURL: "https://quesinator-f7538.firebaseio.com",
-  projectId: "quesinator-f7538",
-  storageBucket: "quesinator-f7538.appspot.com",
-  messagingSenderId: "24618923572"
+  apiKey: 'AIzaSyB317U7_q357AO3NMeBmUznWLuEdWCf0wU',
+  authDomain: 'quesinator-f7538.firebaseapp.com',
+  databaseURL: 'https://quesinator-f7538.firebaseio.com',
+  projectId: 'quesinator-f7538',
+  storageBucket: 'quesinator-f7538.appspot.com',
+  messagingSenderId: '24618923572'
 };
 /**
  * `AppModule` is the main entry point into Angular2's bootstraping process

@@ -1,162 +1,125 @@
 import { Component, OnInit } from '@angular/core';
-
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { Observable } from 'rxjs/Observable';
-import * as firebase from 'firebase/app';
-import { QuestionService } from "../../shared/questions.service";
-import { Subscription } from "rxjs/Subscription";
-import { Questions } from "../../shared/models/questions";
-import { Router } from "@angular/router";
-import { SharedService } from "../../shared/services/shared.service";
+import { QuestionService } from '../../shared/questions.service';
+import { Questions } from '../../shared/models/questions';
+import { Router } from '@angular/router';
+import { SharedService } from '../../shared/services/shared.service';
 
 @Component({
-    selector: 'q-question-list',
-    templateUrl: 'questions-list.component.html',
-    styleUrls: ['questions-list.component.scss']
+  selector: 'q-question-list',
+  templateUrl: 'questions-list.component.html',
+  styleUrls: ['questions-list.component.scss']
 })
 
 export class QuestionsListComponent implements OnInit {
-    q: any;
-    items: any;
-    answerThis: any[] = [];
-    public quest: Questions[];
-    public questionId: number;
-    public questionsId: number[] = [];
-    public ind: number = 0;
+  public q: any;
+  public items: any;
+  public answerThis: any[] = [];
+  public quest: Questions[];
+  public questionsId: number[] = [];
+  public ind: number = 0;
 
-    public radio: any;
-    public button: any;
-    public correctAnswer: number;
-    public coorectAnswersDone: number[] = [];
+  public radio: any;
+  public button: any;
+  public coorectAnswersDone: number[] = [];
 
-    public flagTrue: boolean;
+  public flagTrue: boolean;
 
-    constructor(
-        private questionService: QuestionService,
-        private router: Router,
-        private sharedService: SharedService,
-    ) {
+  constructor(private questionService: QuestionService,
+              private router: Router,
+              private sharedService: SharedService) {
+    this.getQuestions();
+    this.radio = document.getElementsByName('radio');
+    this.button = document.getElementsByClassName('s-question_submit');
+    this.flagTrue = true;
+  }
 
-        this.getQuestions();
+  public ngOnInit() {
+    this.sharedService.trueAnswers = this.coorectAnswersDone;
 
-        this.radio = document.getElementsByName('radio');
-        this.button = document.getElementsByClassName('s-question_submit');
-        this.flagTrue = true;
-        console.log(this.flagTrue)
+    this.questionService.getQuestionInfoFromForm().subscribe((res) => {
+      this.answerThis = res;
+    });
 
-    }
-    ngOnInit() {
-        this.sharedService.trueAnswers = this.coorectAnswersDone;
-
-        this.questionService.getQuestionInfoFromForm().subscribe(res => {
-            this.answerThis = res;
+    this.items = this.questionService.getSnapshotQuestionInfoFromForm();
+    this.items
+      .subscribe((snapshots) => {
+        snapshots.forEach((snapshot) => {
+          this.q = snapshot;
         });
+      });
+  }
 
-        this.items = this.questionService.getSnapshotQuestionInfoFromForm();
-        this.items
-            .subscribe(snapshots => {
-                snapshots.forEach(snapshot => {
-                    this.q = snapshot;
-                    this.qQ()
-                });
-            })
-
-       
-    }
-    qQ() {
-        return console.log('this.q------------------------', this.q)
-    }
-
-    public getQuestions() {
-        this.questionService
-            .getQuestion()
-            .subscribe((res) => {
-                this.quest = [];
-                res.forEach((q) => {
-                    this.quest.push(q);
-                });
-            });
-    }
-
-    toggleTrueFlag() {
-        this.flagTrue = false;
-        console.log(this.flagTrue)
-    }
-
-    maxId(): number {
-        let max: number;
-        for (let i = 0; i <= this.quest.length; i++) {
-            max = i;
-        }
-        return max - 1;
-    }
-
-    public addUncheckedRadio(radio) {
-        radio.forEach(element => {
-            element.checked = false;
+  public getQuestions() {
+    this.questionService
+      .getQuestion()
+      .subscribe((res) => {
+        this.quest = [];
+        res.forEach((q) => {
+          this.quest.push(q);
         });
+      });
+  }
+
+  public toggleTrueFlag() {
+    this.flagTrue = false;
+  }
+
+  public maxId(): number {
+    let max: number;
+    for (let i = 0; i <= this.quest.length; i++) {
+      max = i;
     }
+    return max - 1;
+  }
 
-    public correctAnswerOrNo() {
-        let radioId;
-        this.radio.forEach((element, i) => {
-            radioId = +element.id.slice(6)
-            if (element.checked) {
-                
-                if (radioId == this.quest[this.ind].correct) {
-                    this.coorectAnswersDone.push(this.quest[this.ind].correct);
-                } else {
-                    this.coorectAnswersDone.push(0);
+  public addUncheckedRadio(radio) {
+    radio.forEach((element) => {
+      element.checked = false;
+    });
+  }
 
-                }
-            }
-        });
-    }
-
-
-    nextAnswer() {
-        console.log(this.button);
-        if (this.ind < this.maxId()) {
-            this.correctAnswerOrNo();
-            this.ind++;
-            this.flagTrue = true;
-            this.addUncheckedRadio(this.radio);
-            console.log(this.answerThis);
+  public correctAnswerOrNo() {
+    let radioId;
+    this.radio.forEach((element, i) => {
+      radioId = +element.id.slice(6);
+      if (element.checked) {
+        if (radioId === this.quest[this.ind].correct) {
+          this.coorectAnswersDone.push(this.quest[this.ind].correct);
         } else {
-            this.correctAnswerOrNo();
-            this.ind++;
-            console.log(this.maxId());
-
-            for (let i = 0; i < this.coorectAnswersDone.length; i++) {
-                if (this.coorectAnswersDone[i] == 1) {
-                    let qwer;
-                    let nocorrect;
-                    qwer = this.answerThis[i].correctly;
-                    nocorrect = this.answerThis[i].nocorrectly;
-                    qwer++;
-
-                    this.questionService.addQuestionInfoFromForm(i, qwer, nocorrect)
-                } else {
-                    let qwer;
-                    let correct;
-                    correct = this.answerThis[i].correctly;
-                    qwer = this.answerThis[i].nocorrectly;
-
-                    qwer++;
-                    this.questionService.addQuestionInfoFromForm(i, correct, qwer)
-
-                }
-                console.log(this.questionService)
-            }
-
-
-            this.router.navigate(['/result'])
+          this.coorectAnswersDone.push(0);
         }
+      }
+    });
+  }
+
+  public nextAnswer() {
+    if (this.ind < this.maxId()) {
+      this.correctAnswerOrNo();
+      this.ind++;
+      this.flagTrue = true;
+      this.addUncheckedRadio(this.radio);
+    } else {
+      this.correctAnswerOrNo();
+      this.ind++;
+      for (let i = 0; i < this.coorectAnswersDone.length; i++) {
+        if (this.coorectAnswersDone[i] === 1) {
+          let qwer;
+          let nocorrect;
+          qwer = this.answerThis[i].correctly;
+          nocorrect = this.answerThis[i].nocorrectly;
+          qwer++;
+
+          this.questionService.addQuestionInfoFromForm(i, qwer, nocorrect);
+        } else {
+          let qwer;
+          let correct;
+          correct = this.answerThis[i].correctly;
+          qwer = this.answerThis[i].nocorrectly;
+          qwer++;
+          this.questionService.addQuestionInfoFromForm(i, correct, qwer);
+        }
+      }
+      this.router.navigate(['/result']);
     }
-
-    public ngOnDestroy() {
-    }
-
-
+  }
 }

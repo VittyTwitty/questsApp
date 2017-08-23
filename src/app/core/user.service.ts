@@ -1,53 +1,45 @@
 import { Injectable } from '@angular/core';
-import { AuthService } from "./auth.service";
-import { LocalStorageService } from "./local-storage.service";
-import { AngularFireDatabase } from "angularfire2/database";
-import { Observable } from "rxjs/Observable";
-import { of } from 'rxjs/observable/of';
+import { AuthService } from './auth.service';
+import { LocalStorageService } from './local-storage.service';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 @Injectable()
 export class UserService {
-    currentUser: any;
-    constructor(
-        private lsService: LocalStorageService,
-        public af: AngularFireDatabase,
-    ) {
-    }
+  public currentUser: any;
 
-    getUser() {
-        this.currentUser = this.lsService.user
-        return this.currentUser;
-    }
+  constructor(private lsService: LocalStorageService,
+              public af: AngularFireDatabase,) {
+  }
 
-    getListUsers() {
-        return this.af.list('/q-users');
-    }
+  public getUser() {
+    this.currentUser = this.lsService.user;
+    return this.currentUser;
+  }
 
-    public addUserBestAns(uid) {
-        return this.af.object(`q-users/${uid}/tests`)
-    }
-    public updateUserCounter(uid) {
-        return this.af.object(`q-users/${uid}/tests`)
-            .map(res => {
-                console.log('res = ', res)
-                
-            })
-    }
+  public getListUsers() {
+    return this.af.list('/q-users');
+  }
 
-    getUserMap() {
-        return this.af.list('/q-users').map(res => {
-            let currentUser = res;
-            return currentUser;
-        })
-    }
+  public addUserBestAns(uid) {
+    return this.af.object(`q-users/${uid}/tests`);
+  }
 
-    getListUsersRole(uid) {
-        return this.af.object(`q-users/${uid}/role`).map(res => {
-            let c = res;
-            return c;
-        });
-    }
+  public updateUserCounter(uid) {
+    return this.af.object(`q-users/${uid}/tests`);
+  }
 
+  public getUserMap() {
+    return this.af.list('/q-users').map((res) => {
+      let currentUser = res;
+      return currentUser;
+    });
+  }
 
+  public getListUsersRole(uid) {
+    return this.af.object(`q-users/${uid}/role`).map((res) => {
+      let c = res;
+      return c;
+    });
+  }
 
 }

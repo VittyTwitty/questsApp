@@ -1,60 +1,47 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { UserService } from "../../core/user.service";
-import { AuthService } from "../../core/auth.service";
-import { Router } from "@angular/router";
-import { Subscription } from "rxjs/Subscription";
+import { Component, OnInit } from '@angular/core';
+import { UserService } from '../../core/user.service';
+import { AuthService } from '../../core/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
-    selector: 'q-header',
-    templateUrl: 'header.html',
-    styleUrls: ['header.scss']
+  selector: 'q-header',
+  templateUrl: 'header.html',
+  styleUrls: ['header.scss']
 })
 
-export class HeaderComponent implements OnInit, OnDestroy {
-    userOnl: any;
-    user: any;
-    public sub: Subscription;
-    public loggedInUser: boolean = false;
+export class HeaderComponent implements OnInit {
+  public userOnl: any;
+  public loggedInUser: boolean = false;
+  private user: any;
 
-    constructor(
-        private userService: UserService,
-        private authService: AuthService,
-        private router: Router
-    ) {
+  constructor(private userService: UserService,
+              private authService: AuthService,
+              private router: Router) {
 
-    }
-    qwe() {
-        console.log(this.user = this.userService.getUser());
-    }
+  }
 
-    ngOnInit() {
-        this.authService.authListener()
-            .subscribe(
-            (data) => {
-                this.setData()
+  public qwe() {
+    console.log(this.user = this.userService.getUser());
+  }
 
-            });
-    }
+  public ngOnInit() {
+    this.authService.authListener()
+      .subscribe(
+        (data) => {
+          this.setData();
+        });
+  }
 
-    private setData() {
-        this.user = this.userService.getUser();
-        this.loggedInUser = (this.user) ? true : false;
-        console.log('this.loggedInUser', this.loggedInUser)
-        console.log('this.userOnl', this.user)
+  private setData() {
+    this.user = this.userService.getUser();
+    this.loggedInUser = (this.user) ? true : false;
+  }
 
-    }
-
-    logOut() {
-        this.authService.logout()
-            .then(res => {
-                console.log('this.loggedInUser', this.loggedInUser)
-                console.log('this.userOnl', this.user)
-                this.router.navigate(['/']);
-            });
-    }
-
-    public ngOnDestroy() {
-        // this.sub.unsubscribe();
-    }
+  private logOut() {
+    this.authService.logout()
+      .then((res) => {
+        this.router.navigate(['/']);
+      });
+  }
 
 }

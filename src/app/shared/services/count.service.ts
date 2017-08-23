@@ -2,17 +2,13 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class CountService {
+  public count;
 
-    constructor() { }
+  public get () {
+    return this.count;
+  }
 
-    public count;
-
-    get() {
-        return this.count;
-    }
-
-    increment() {
-        this.count++;
-    }
-
+  private increment() {
+    this.count++;
+  }
 }

@@ -1,66 +1,50 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { AddTestService } from "../../shared/services/add-test.service";
-import { AddTest } from "../../shared/models/add-test";
-import { Subscription } from "rxjs/Subscription";
-import { FormGroup, FormControl } from "@angular/forms";
+import { AddTestService } from '../../shared/services/add-test.service';
+import { AddTest } from '../../shared/models/add-test';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
-    selector: 'q-create-tests',
-    templateUrl: 'create-tests.component.html',
-    styleUrls: ['create-tests.component.scss']
+  selector: 'q-create-tests',
+  templateUrl: 'create-tests.component.html',
+  styleUrls: ['create-tests.component.scss']
 })
 
 export class CreateTestsComponent implements OnInit, OnDestroy {
 
+  public sub2: Subscription;
+  public megaTotal: any[] = [];
+  public sub: Subscription;
+  public tests: AddTest[] = [];
+  public keys: any[] = [];
+  public newArrayAnswers: any[] = [];
+  public newArrayQuestions: any[] = [];
+  public total: any[] = [];
+  public testItem: any;
 
-    sub2: Subscription;
-    megaTotal: any[] = [];
+  constructor(private addTestService: AddTestService) {
 
-    sub: Subscription;
-    public tests: AddTest[] = [];
-    public keys: any[] = [];
+  }
 
-    public newArrayAnswers: any[] = []
-    public newArrayQuestions: any[] = [];
-    public questionFormForm: string;
-    public total: any[] = [];
+  public ngOnInit() {
+    this.sub = this.addTestService.getTests().subscribe((res) => {
+      this.tests = [];
+      res.forEach((el) => {
+        this.keys.push(el.$key);
+        this.testItem = el;
+        this.tests.push(this.testItem);
+      });
+    });
+  }
 
-    public testItem: any;
+  public deleteTest(event, key) {
+    this.keys.forEach((element) => {
+      if (element === key) {
+        this.addTestService.removeTest(element);
+      }
+    });
+  }
 
-    constructor(
-        private addTestService: AddTestService
-    ) {
-
-    }
-
-
-    ngOnInit() {
-        this.sub = this.addTestService.getTests().subscribe((res) => {
-            this.tests = [];
-            res.forEach((el) => {
-                this.keys.push(el.$key);
-                this.testItem = el;
-                this.tests.push(this.testItem);
-                // console.log(this.tests)
-            })
-        })  
-    }
-
-
-
-   
-
-    deleteTest(event, key) {
-        this.keys.forEach(element => {
-            if (element == key) {
-                // console.log(element);
-                this.addTestService.removeTest(element);
-            }
-        });
-    }
-
-
-    ngOnDestroy() {
-        this.sub.unsubscribe();
-    }
+  public ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
 }

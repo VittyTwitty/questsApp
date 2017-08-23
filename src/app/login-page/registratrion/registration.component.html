@@ -1,60 +1,69 @@
 <div class="registration">
-    <div class="registration_header">
-        <h2>Registration</h2>
-    </div>
-    <div class="registration_body">
-        <div class="registration_form-wrapper">
-            <form [formGroup]="registrationForm" (submit)="registration($event, addRegisterForm.value)" #addRegisterForm="ngForm" id="registration_form"
-                class="registration_form">
-                <label>
-                    <span>Name: </span>
-                    <input type="text" placeholder="Name" name="name" formControlName="name" />
-                </label>
-                <div class="alert_invalid" *ngIf="!registrationForm.controls['name'].valid && (registrationForm.controls['name'].touched || addRegisterForm.submitted)">
-                    <p *ngIf="registrationForm.controls['name'].hasError('required')">Input field required</p>
-                    <p *ngIf="registrationForm.controls['name'].hasError('minlength')">Password must be 5 characters long, you need another {{registrationForm.controls['name'].errors.minlength.requiredLength
-                        - registrationForm.controls['name'].errors.minlength.actualLength}} characters.</p>
-                    <p *ngIf="registrationForm.controls['name'].hasError('pattern')">Please, enter your true name</p>
-                </div>
-
-                <label>
-                    <span>Email: </span>
-                    <input type="text" placeholder="Email" name="email" formControlName="email" />
-                </label>
-                <div class="alert_invalid" *ngIf="!registrationForm.controls['email'].valid && (registrationForm.controls['email'].touched || addRegisterForm.submitted)">
-                    <p *ngIf="registrationForm.controls['email'].hasError('required')">Input field required</p>
-                    <p *ngIf="registrationForm.controls['email'].hasError('minlength')">Password must be 5 characters long, you need another {{registrationForm.controls['email'].errors.minlength.requiredLength
-                        - registrationForm.controls['email'].errors.minlength.actualLength}} characters.</p>
-                    <p *ngIf="registrationForm.controls['email'].hasError('pattern')">Please, enter your true email</p>
-                </div>
-
-                <label>
-                    <span>Password: </span>
-                    <input type="password" placeholder="Password"  name="password" formControlName="password"/>
-                </label>
-                <div class="alert_invalid" *ngIf="!registrationForm.controls['password'].valid && (registrationForm.controls['password'].touched || addRegisterForm.submitted)">
-                    <p *ngIf="registrationForm.controls['password'].hasError('required')">Input field required</p>
-                    <p *ngIf="registrationForm.controls['password'].hasError('minlength')">Password must be 9 characters long, you need another {{registrationForm.controls['password'].errors.minlength.requiredLength
-                        - registrationForm.controls['password'].errors.minlength.actualLength}} characters.</p>
-                    <p *ngIf="registrationForm.controls['password'].hasError('maxlength')">The max password length is 30 characters</p>
-                    <p *ngIf="registrationForm.controls['password'].hasError('pattern')">Please enter numbers and letters</p>
-                </div>
-
-                <label>
-                    <span>Confirm password: </span>
-                    <input type="password" placeholder="Password" name="confirm_password" formControlName="confirm_password" />
-                </label>
-                <div class="alert_invalid" *ngIf="!registrationForm.controls['confirm_password'].valid && (registrationForm.controls['confirm_password'].touched || addRegisterForm.submitted)">
-                    <p *ngIf="registrationForm.controls['confirm_password'].hasError('required')">Input field required</p>
-                    <p *ngIf="registrationForm.controls['confirm_password'].hasError('notSame')">Passwords do not match!</p>
-                </div>
-
-
-                <button class="registration_form-button" type="submit">Register</button>
-            </form>
-            <div class="registration_links">
-                <a [routerLink]="['/sign-in']" class="registration_links-account-done">Already have an account?</a>
-            </div>
+  <div class="registration_header">
+    <h2>Registration</h2>
+  </div>
+  <div class="registration_body">
+    <div class="registration_form-wrapper">
+      <form [formGroup]="registrationForm" (submit)="registration($event, addRegisterForm.value)"
+            #addRegisterForm="ngForm" id="registration_form"
+            class="registration_form">
+        <label>
+          <span>Name: </span>
+          <input type="text" placeholder="Name" name="name" formControlName="name"/>
+        </label>
+        <div class="alert_invalid"
+             *ngIf="!registrationForm.controls['name'].valid && (registrationForm.controls['name'].touched || addRegisterForm.submitted)">
+          <p *ngIf="registrationForm.controls['name'].hasError('required')">Input field required</p>
+          <p *ngIf="registrationForm.controls['name'].hasError('minlength')">Password must be 5 characters long, you
+            need another {{registrationForm.controls['name'].errors.minlength.requiredLength
+            - registrationForm.controls['name'].errors.minlength.actualLength}} characters.</p>
+          <p *ngIf="registrationForm.controls['name'].hasError('pattern')">Please, enter your true name</p>
         </div>
+
+        <label>
+          <span>Email: </span>
+          <input type="text" placeholder="Email" name="email" formControlName="email"/>
+        </label>
+        <div class="alert_invalid"
+             *ngIf="!registrationForm.controls['email'].valid && (registrationForm.controls['email'].touched || addRegisterForm.submitted)">
+          <p *ngIf="registrationForm.controls['email'].hasError('required')">Input field required</p>
+          <p *ngIf="registrationForm.controls['email'].hasError('minlength')">Password must be 5 characters long, you
+            need another {{registrationForm.controls['email'].errors.minlength.requiredLength
+            - registrationForm.controls['email'].errors.minlength.actualLength}} characters.</p>
+          <p *ngIf="registrationForm.controls['email'].hasError('pattern')">Please, enter your true email</p>
+        </div>
+
+        <label>
+          <span>Password: </span>
+          <input type="password" placeholder="Password" name="password" formControlName="password"/>
+        </label>
+        <div class="alert_invalid"
+             *ngIf="!registrationForm.controls['password'].valid && (registrationForm.controls['password'].touched || addRegisterForm.submitted)">
+          <p *ngIf="registrationForm.controls['password'].hasError('required')">Input field required</p>
+          <p *ngIf="registrationForm.controls['password'].hasError('minlength')">Password must be 9 characters long, you
+            need another {{registrationForm.controls['password'].errors.minlength.requiredLength
+            - registrationForm.controls['password'].errors.minlength.actualLength}} characters.</p>
+          <p *ngIf="registrationForm.controls['password'].hasError('maxlength')">The max password length is 30
+            characters</p>
+          <p *ngIf="registrationForm.controls['password'].hasError('pattern')">Please enter numbers and letters</p>
+        </div>
+
+        <label>
+          <span>Confirm password: </span>
+          <input type="password" placeholder="Password" name="confirm_password" formControlName="confirm_password"/>
+        </label>
+        <div class="alert_invalid"
+             *ngIf="!registrationForm.controls['confirm_password'].valid && (registrationForm.controls['confirm_password'].touched || addRegisterForm.submitted)">
+          <p *ngIf="registrationForm.controls['confirm_password'].hasError('required')">Input field required</p>
+          <p *ngIf="registrationForm.controls['confirm_password'].hasError('notSame')">Passwords do not match!</p>
+        </div>
+
+
+        <button class="registration_form-button" type="submit">Register</button>
+      </form>
+      <div class="registration_links">
+        <a [routerLink]="['/sign-in']" class="registration_links-account-done">Already have an account?</a>
+      </div>
     </div>
+  </div>
 </div>

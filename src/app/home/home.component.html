@@ -1,76 +1,76 @@
 <q-header></q-header>
 
 <section class="s-home">
-    <div class="grid" data-grid="center none">
-        <div class="grid__item" data-grid="4/12">
-            <div class="s-home_user">
-                <h3 *ngIf="loggedInUser">Hello, {{user?.name}}</h3>
-                <h3 *ngIf="!loggedInUser">Tests</h3>
-                <div class="s-home_user-description" *ngIf="loggedInUser">
-                    <div> Лучшая оценка за тест: <b>{{userAnswers?.tests?.bestCorrectlyAnswer}}</b></div> <br>
-                    <div> Наибольшее количество ошибок: <b>{{userAnswers?.tests?.bestNocorrectlyAnswer}}</b></div> <br>
-                    <div> Попыток пройти тест: <b>{{userAnswers?.tests?.countOfTests}}</b></div> <br>
-
-                </div>
-                <div class="s-home_user-description" *ngIf="!loggedInUser">
-                    <div> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Pariatur nobis esse non eos, corporis nulla
-                        doloremque sit explicabo veritatis culpa.</div>
-
-                </div>
-                <div class="s-home_user-rating">
-                    Lorem ipsum dolor.
-                </div>
-
-                <button class="go-admin" *ngIf="r" routerLink="/admin"> Перейти в админку</button>
-            </div>
+  <div class="grid" data-grid="center none">
+    <div class="grid__item" data-grid="4/12">
+      <div class="s-home_user">
+        <h3 *ngIf="loggedInUser">Hello, {{user?.name}}</h3>
+        <h3 *ngIf="!loggedInUser">Tests</h3>
+        <div class="s-home_user-description" *ngIf="loggedInUser">
+          <div> Лучшая оценка за тест: <b>{{userAnswers?.tests?.bestCorrectlyAnswer}}</b></div>
+          <br>
+          <div> Наибольшее количество ошибок: <b>{{userAnswers?.tests?.bestNocorrectlyAnswer}}</b></div>
+          <br>
+          <div> Попыток пройти тест: <b>{{userAnswers?.tests?.countOfTests}}</b></div>
+          <br>
         </div>
-        <div class="grid__item" data-grid="4/12">
-            <div class="grid" data-grid="left none">
-                <div class="grid__item mgbt20" data-grid="6/12">
-                    <a routerLink="/question" (click)="counter()" class="s-home_test">
-                        <div class="s-home_test-img">
-                            <img src="../../assets/img/stats.png" alt="">
-                        </div>
-                        <h3 class="s-home_test-descr">
-                            Title test
-                        </h3>
-                        <div class="s-home_test-descr">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure quaerat nam, ipsa.
-                        </div>
-
-
-                    </a>
-                </div>
-                <div class="grid__item mgbt20" data-grid="6/12">
-                    <div class="s-home_test">
-                        <div class="s-home_test-img">
-                            <img src="../../assets/img/calculator.png" alt="">
-                        </div>
-                        <h3 class="s-home_test-descr">
-                            Тест планируется
-                        </h3>
-                        <div class="s-home_test-descr">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure quaerat nam, ipsa.
-                        </div>
-                    </div>
-                </div>
-                <div class="grid__item mgbt20" data-grid="6/12">
-                    <div class="s-home_test">
-                        <div class="s-home_test-img">
-                            <img src="../../assets/img/java.png" alt="">
-                        </div>
-                        <h3 class="s-home_test-descr">
-                            Тест планируется
-                        </h3>
-                        <div class="s-home_test-descr">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure quaerat nam, ipsa.
-                        </div>
-                    </div>
-                </div>
-
-            </div>
+        <div class="s-home_user-description" *ngIf="!loggedInUser">
+          <div> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Pariatur nobis esse non eos, corporis nulla
+            doloremque sit explicabo veritatis culpa.
+          </div>
         </div>
+        <div class="s-home_user-rating">
+          Lorem ipsum dolor.
+        </div>
+
+        <button class="go-admin" *ngIf="r" routerLink="/admin"> Перейти в админку</button>
+      </div>
     </div>
+    <div class="grid__item" data-grid="4/12">
+      <div class="grid" data-grid="left none">
+        <div class="grid__item mgbt20" data-grid="6/12">
+          <a routerLink="/question" (click)="counter()" class="s-home_test">
+            <div class="s-home_test-img">
+              <img src="../../assets/img/stats.png" alt="">
+            </div>
+            <h3 class="s-home_test-descr">
+              Title test
+            </h3>
+            <div class="s-home_test-descr">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure quaerat nam, ipsa.
+            </div>
+          </a>
+        </div>
+        <div class="grid__item mgbt20" data-grid="6/12">
+          <div class="s-home_test">
+            <div class="s-home_test-img">
+              <img src="../../assets/img/calculator.png" alt="">
+            </div>
+            <h3 class="s-home_test-descr">
+              Тест планируется
+            </h3>
+            <div class="s-home_test-descr">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure quaerat nam, ipsa.
+            </div>
+          </div>
+        </div>
+        <div class="grid__item mgbt20" data-grid="6/12">
+          <div class="s-home_test">
+            <div class="s-home_test-img">
+              <img src="../../assets/img/java.png" alt="">
+            </div>
+            <h3 class="s-home_test-descr">
+              Тест планируется
+            </h3>
+            <div class="s-home_test-descr">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure quaerat nam, ipsa.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
 </section>
 
 <q-footer></q-footer>

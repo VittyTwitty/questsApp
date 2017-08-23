@@ -1,74 +1,56 @@
 <q-header></q-header>
-<!-- <div class="container">
-    <div class="radio">
-        <input id="radio-1" name="radio" type="radio" checked>
-        <label for="radio-1" class="radio-label">Checked</label>
-    </div>
 
-    <div class="radio">
-        <input id="radio-2" name="radio" type="radio">
-        <label for="radio-2" class="radio-label">Unchecked</label>
-    </div>
-
-    <div class="radio">
-        <input id="radio-3" name="radio" type="radio" disabled>
-        <label for="radio-3" class="radio-label">Disabled</label>
-    </div>
-</div> -->
 <section class="s-question">
-    <div class="grid" data-grid="center none">
-        <div class="grid__item" data-grid="8/12">
-            <h2>Name of test</h2>
-            <!-- <ng-template ngFor let-i="index" let-item [ngForOf]="question"> -->
-            <!-- <q-questions-item [item]=item [i]=i></q-questions-item> -->
-            <div class="s-question_body" *ngIf="quest">
-                  <div class="s-question_title">  
-                     {{quest[ind].question}} 
-                 </div> 
-                <div class="grid s-question_list" data-grid="center none">
-                     <div class="grid__item" data-grid="3/12">
-                        <div class="s-question_item">
-                            <div class="radio">
-                                <input id="radio-1" (click)="toggleTrueFlag()" name="radio" type="radio">
-                                <label for="radio-1" class="radio-label">{{quest[ind].answers.a1}}</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="grid__item" data-grid="3/12">
-                        <div class="s-question_item">
-                            <div class="radio">
-                                <input id="radio-2" (click)="toggleTrueFlag()" name="radio" type="radio">
-                                <label for="radio-2" class="radio-label">{{quest[ind].answers.a2}}</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="grid__item" data-grid="3/12">
-                        <div class="s-question_item">
-                            <div class="radio">
-                                <input id="radio-3" (click)="toggleTrueFlag()" name="radio" type="radio">
-                                <label for="radio-3" class="radio-label">{{quest[ind].answers.a3}}</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="grid__item" data-grid="3/12">
-                        <div class="s-question_item">
-                            <div class="radio">
-                                <input id="radio-4" (click)="toggleTrueFlag()" name="radio" type="radio">
-                                <label for="radio-4" class="radio-label">{{quest[ind].answers.a4}}</label>
-                            </div>
-                        </div>
-                    </div> 
-                    
-                </div>
-                <div class="grid s-question_list" data-grid="center none">
-                    <div class="grid__item" data-grid="3/12">
-                        <button class="s-question_submit" (click)="nextAnswer()" [disabled]="flagTrue">Answer</button>
-                    </div>
-                </div>
-            </div>
-            <!-- </ng-template> -->
+  <div class="grid" data-grid="center none">
+    <div class="grid__item" data-grid="8/12">
+      <h2>Name of test</h2>
+      <div class="s-question_body" *ngIf="quest">
+        <div class="s-question_title">
+          {{quest[ind].question}}
         </div>
+        <div class="grid s-question_list" data-grid="center none">
+          <div class="grid__item" data-grid="3/12">
+            <div class="s-question_item">
+              <div class="radio">
+                <input id="radio-1" (click)="toggleTrueFlag()" name="radio" type="radio">
+                <label for="radio-1" class="radio-label">{{quest[ind].answers.a1}}</label>
+              </div>
+            </div>
+          </div>
+          <div class="grid__item" data-grid="3/12">
+            <div class="s-question_item">
+              <div class="radio">
+                <input id="radio-2" (click)="toggleTrueFlag()" name="radio" type="radio">
+                <label for="radio-2" class="radio-label">{{quest[ind].answers.a2}}</label>
+              </div>
+            </div>
+          </div>
+          <div class="grid__item" data-grid="3/12">
+            <div class="s-question_item">
+              <div class="radio">
+                <input id="radio-3" (click)="toggleTrueFlag()" name="radio" type="radio">
+                <label for="radio-3" class="radio-label">{{quest[ind].answers.a3}}</label>
+              </div>
+            </div>
+          </div>
+          <div class="grid__item" data-grid="3/12">
+            <div class="s-question_item">
+              <div class="radio">
+                <input id="radio-4" (click)="toggleTrueFlag()" name="radio" type="radio">
+                <label for="radio-4" class="radio-label">{{quest[ind].answers.a4}}</label>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="grid s-question_list" data-grid="center none">
+          <div class="grid__item" data-grid="3/12">
+            <button class="s-question_submit" (click)="nextAnswer()" [disabled]="flagTrue">Answer</button>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </section>
 
 <q-footer></q-footer>

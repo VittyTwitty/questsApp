@@ -62,7 +62,9 @@ dll/
 
 # IDE #
 .idea/
+.vscode/
 *.swp
+
 
 
 # Angular #

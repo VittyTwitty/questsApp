@@ -1,46 +1,46 @@
 @import '../../../styles/_variables.scss';
 
 .s-admin-main {
-    &_edit-test {
-        display: flex;
-        flex-wrap: wrap;
+  &_edit-test {
+    display: flex;
+    flex-wrap: wrap;
 
+  }
+  &_edit-item {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 150px;
+    height: 150px;
+    background-color: #41abe1;
+    color: #fff;
+    margin-top: 20px;
+    margin-left: 20px;
+    text-align: center;
+    padding: 5px;
+    h4 {
+      margin: 10px 0 0 0;
     }
-    &_edit-item {
-        display: flex;        
-        justify-content: space-between;
-        flex-direction: column;
-        width: 150px;
-        height: 150px;        
-        background-color: #41abe1;
-        color: #fff;
-        margin-top: 20px;
-        margin-left: 20px;
-        text-align: center;
-        padding: 5px;
-        h4 {
-            margin: 10px 0 0 0;
-        }
-        div {
-            display: flex;
-            align-content: center;
-            justify-content: space-around;
-            margin-bottom: 10px;
-        }
-        button {
-            width: 45px;
-            height: 45px;
-            background: #E51C23;
-            border: none;
-            border: 1px solid #E51C23;
-            transition: .3s;
-            &:hover {
-                border: 1px solid #fff;
-            }
-            cursor: pointer;
-            svg {
-                width: 100%;
-            }
-        }
+    div {
+      display: flex;
+      align-content: center;
+      justify-content: space-around;
+      margin-bottom: 10px;
     }
+    button {
+      width: 45px;
+      height: 45px;
+      background: #E51C23;
+      border: none;
+      border: 1px solid #E51C23;
+      transition: .3s;
+      &:hover {
+        border: 1px solid #fff;
+      }
+      cursor: pointer;
+      svg {
+        width: 100%;
+      }
+    }
+  }
 }

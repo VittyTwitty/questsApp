@@ -1,84 +1,88 @@
 @import '../../../styles/_variables.scss';
 
 .registration {
-    font-size: 16px;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  min-height: 400px;
+  border: 1px solid $main_color;
+  margin: 50px auto 0;
+  &_header {
+    width: 100%;
+    background-color: $main_color;
+    text-align: center;
+    h2 {
+      color: #fff;
+      line-height: 50px;
+      font-weight: bold;
+    }
+  }
+  &_body {
+    width: 100%;
+    min-height: 360px;
+    padding-top: 30px;
+    padding-bottom: 30px;
     display: flex;
     flex-direction: column;
-    width: 400px;
-    height: 500px;
-    border: 1px solid $main_color;
-    margin: 50px auto 0;
-    &_header {
-        width: 100%;
-        background-color: $main_color;
-        text-align: center;
-        h2 {
-            color: #fff;
-            line-height: 50px;
-            font-weight: bold;
-        }
-    }
-    &_body {
-        width: 100%;
-        height: 450px;
-        display: flex;
-        flex-direction: column;
-    }
-    &_form-wrapper {
-        margin: auto;
-        width: 55%;
-    }
+  }
+  &_form-wrapper {
+    margin: auto;
+    width: 55%;
+  }
 }
 
-.registration_form{
-    display: flex;
-    flex-direction: column;
-    label {
-        &>span {
-            display: block;
-            margin-top: 10px;
-            margin-bottom: 5px;
-        }
-        &>input {
-            box-sizing: border-box;
-            height: 32px;            
-            width: 100%;
-
-        }
+.registration_form {
+  display: flex;
+  flex-direction: column;
+  label {
+    & > span {
+      display: block;
+      margin-top: 10px;
+      margin-bottom: 5px;
     }
-    &-button {
-        height: 32px;
-        border: none;
-        margin-top: 15px;
-        background-color: $main-color;
-        color: #fff;
-        cursor: pointer;
-        transition: all .3s;
-        &:hover {
-            background-color: $second-color;
-        }        
-        &:active {
-            background-color: $third-color;
-        }
+    & > input {
+      box-sizing: border-box;
+      height: 32px;
+      width: 100%;
 
     }
-}
-.registration_links{
-    &-account-done {
-        text-decoration: none;
-        font-size: .70em;
-        float: right;
-        margin-top: 5px;
-        color: $second-color;
-        &:hover {
-            color: $main-color;
-        }
+  }
+  &-button {
+    height: 32px;
+    border: none;
+    margin-top: 15px;
+    background-color: $main-color;
+    color: #fff;
+    cursor: pointer;
+    transition: all .3s;
+    &:hover {
+      background-color: $second-color;
     }
+    &:active {
+      background-color: $third-color;
+    }
+
+  }
 }
+
+.registration_links {
+  &-account-done {
+    text-decoration: none;
+    font-size: .70em;
+    float: right;
+    margin-top: 5px;
+    color: $second-color;
+    &:hover {
+      color: $main-color;
+    }
+  }
+}
+
 .alert_invalid {
-    p {
-        color: #a20202;
-        font-size: .8em;
-        margin-top: 4px;
-    }
+  p {
+    color: #a20202;
+    font-size: .8em;
+    margin-top: 4px;
+  }
 }

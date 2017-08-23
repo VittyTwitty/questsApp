@@ -1,10 +1,8 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { QuestionsListComponent } from "./questions-list/questions-list.component";
-import { QuestionsResultComponent } from "./questions-result/questions-result.component";
-import { AuthGuard } from "../core/auth-guard.service";
-import { QuestionGuard } from "../shared/question-guard";
-
+import { Routes } from '@angular/router';
+import { QuestionsListComponent } from './questions-list/questions-list.component';
+import { QuestionsResultComponent } from './questions-result/questions-result.component';
+import { AuthGuard } from '../core/auth-guard.service';
+import { QuestionGuard } from '../shared/question-guard';
 
 export const questionsRoutes: Routes = [
     {
@@ -17,5 +15,4 @@ export const questionsRoutes: Routes = [
         component: QuestionsResultComponent,
         canActivate: [AuthGuard],
     },
-
-]
+];
