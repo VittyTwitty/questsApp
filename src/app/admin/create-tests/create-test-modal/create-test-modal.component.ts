@@ -24,7 +24,7 @@ export class CreateTestModalComponent implements OnInit, OnDestroy {
     question: new FormControl(''),
     answers: this.fb.array([
       this.fb.group({
-        answer: ''
+        answer: new FormControl('')
       }),
       this.fb.group({
         answer: ''
@@ -61,7 +61,6 @@ export class CreateTestModalComponent implements OnInit, OnDestroy {
 
   public addDynamicAnswerInForm() {
     this.answers.push(this.fb.group({answer: ''}));
-    console.log(this.answers);
   }
 
   public deleteDynamicAnswerInForm() {
@@ -80,26 +79,23 @@ export class CreateTestModalComponent implements OnInit, OnDestroy {
 
   public pushToNewQuestions(value) {
     this.questionFormForm = value.question;
-    console.log(this.data);
     this.newArrayAnswers = [];
-    for (let key in value.answer) {
-      if (value.answer.hasOwnProperty(key)) {
-        continue;
-      }
-      if (value.answer[key] !== '') {
-        this.newArrayAnswers.push(value.answer[key]);
+    for (let key in value.answers) {
+      // if (value.answers.hasOwnProperty(key)) {
+      //   continue;
+      // }
+      if (value.answers[key] !== '') {
+        this.newArrayAnswers.push(value.answers[key]);
+        console.log(value.answers[key]);
       }
     }
+
     // this.total.push(this.newArrayAnswers);
     // this.total.push(this.questionFormForm);
-    // console.log(this.newArrayQuestions)
   }
 
   public pushToAnswers(value) {
-    console.log(value);
     // this.newArrayAnswers.push(value.answer);
-    // console.log(value.answer.getValue())
-    // console.log(this.newArrayAnswers)
   }
 
   public ngOnDestroy() {

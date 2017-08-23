@@ -42,7 +42,6 @@ export class QuestionsResultComponent implements OnInit, OnDestroy {
           if (element.$key === this.user.uid) {
             this.currentUserAnswers = element.tests;
             this.setUser(this.trueAnswer, this.falseAnswer);
-            console.log(this.currentUserAnswers);
           }
         });
       });

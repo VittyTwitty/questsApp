@@ -57,7 +57,6 @@ export class AdminStatisticComponent implements OnInit {
     this.userService.getUserMap()
       .subscribe((users) => {
         users.forEach((element) => {
-          console.log(element.tests.bestCorrectlyAnswer);
           this.arrayOfUsersBestAnsers.push(element.tests.bestCorrectlyAnswer);
         });
         this.adminUsersBestAnswer = this.getMaxNumber(this.arrayOfUsersBestAnsers);

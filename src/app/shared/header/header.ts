@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
 })
 
 export class HeaderComponent implements OnInit {
-  public userOnl: any;
   public loggedInUser: boolean = false;
   private user: any;
 
@@ -18,10 +17,6 @@ export class HeaderComponent implements OnInit {
               private authService: AuthService,
               private router: Router) {
 
-  }
-
-  public qwe() {
-    console.log(this.user = this.userService.getUser());
   }
 
   public ngOnInit() {

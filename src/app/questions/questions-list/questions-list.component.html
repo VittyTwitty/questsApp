@@ -45,7 +45,9 @@
         </div>
         <div class="grid s-question_list" data-grid="center none">
           <div class="grid__item" data-grid="3/12">
-            <button class="s-question_submit" (click)="nextAnswer()" [disabled]="flagTrue">Answer</button>
+            <button class="s-question_submit" (click)="nextAnswer()" [disabled]="flagTrue"
+                    [class.disable-highlight]="flagTrue" >Answer
+            </button>
           </div>
         </div>
       </div>

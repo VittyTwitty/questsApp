@@ -22,7 +22,6 @@ export class AdminDialogComponent implements OnInit {
   });
 
   constructor(private addTestService: AddTestService) {
-
   }
 
   public ngOnInit() {
@@ -34,7 +33,6 @@ export class AdminDialogComponent implements OnInit {
   }
 
   public addTestsSubmit($event, val) {
-    console.log($event, val);
     this.addTestService.addNewTest(val.nameOfTest);
   }
 }

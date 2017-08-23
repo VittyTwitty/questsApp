@@ -27,14 +27,12 @@ export class RoleGuard implements CanActivate {
         (data) => {
           this.user = this.userService.getUser();
           this.adminUid = this.user.uid;
-          console.log(this.adminUid);
         });
     // }
     if (this.adminUid === 'kQvVa3wF3VPJg2SVolGQsOOiHwy1') {
       return true;
     } else {
       this.router.navigate(['/']);
-      console.log('Unauthorized to open link:');
       return false;
     }
   }

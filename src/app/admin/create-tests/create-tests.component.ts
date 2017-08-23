@@ -11,14 +11,11 @@ import { Subscription } from 'rxjs/Subscription';
 
 export class CreateTestsComponent implements OnInit, OnDestroy {
 
-  public sub2: Subscription;
-  public megaTotal: any[] = [];
   public sub: Subscription;
   public tests: AddTest[] = [];
   public keys: any[] = [];
   public newArrayAnswers: any[] = [];
   public newArrayQuestions: any[] = [];
-  public total: any[] = [];
   public testItem: any;
 
   constructor(private addTestService: AddTestService) {

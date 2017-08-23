@@ -40,3 +40,10 @@
     }
   }
 }
+
+.disable-highlight {
+  &:hover {
+    background-color: #898890;
+  }
+  background-color: #898890;
+}

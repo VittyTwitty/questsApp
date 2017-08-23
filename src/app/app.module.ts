@@ -77,6 +77,7 @@ export const firebaseConfig = {
   storageBucket: 'quesinator-f7538.appspot.com',
   messagingSenderId: '24618923572'
 };
+
 /**
  * `AppModule` is the main entry point into Angular2's bootstraping process
  */
@@ -100,7 +101,7 @@ export const firebaseConfig = {
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     MdNativeDateModule,
-    RouterModule.forRoot(ROUTES, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(ROUTES, {preloadingStrategy: PreloadAllModules})
   ],
   /**
    * Expose our Services and Providers into Angular's dependency injection.
@@ -124,16 +125,15 @@ export const firebaseConfig = {
 })
 export class AppModule {
 
-  constructor(
-    public appRef: ApplicationRef,
-    public appState: AppState
-  ) { }
+  constructor(public appRef: ApplicationRef,
+              public appState: AppState) {
+  }
 
   public hmrOnInit(store: StoreType) {
     if (!store || !store.state) {
       return;
     }
-    console.log('HMR store', JSON.stringify(store, null, 2));
+    // console.log('HMR store', JSON.stringify(store, null, 2));
     /**
      * Set state
      */
