@@ -12,7 +12,7 @@ import { CreateTestModalComponent } from '../../create-tests/create-test-modal/c
       </svg>
     </button>`,
 })
-export class DialogEditButton {
+export class DialogEditButtonComponent {
   @Input() public item;
 
   constructor(public dialog: MdDialog) {

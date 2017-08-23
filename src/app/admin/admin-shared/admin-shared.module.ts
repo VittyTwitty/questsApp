@@ -4,7 +4,7 @@ import { AdminDialogComponent } from './admin-modal/admin-modal';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CreateTestModalComponent } from '../create-tests/create-test-modal/create-test-modal.component';
 import { DialogOverviewExample } from './buttons/add-button.component';
-import { DialogEditButton } from './buttons/edit-button.component';
+import { DialogEditButtonComponent } from './buttons/edit-button.component';
 
 @NgModule({
 
@@ -15,18 +15,18 @@ import { DialogEditButton } from './buttons/edit-button.component';
   exports: [
     DialogOverviewExample,
     AdminDialogComponent,
-    DialogEditButton,
+    DialogEditButtonComponent,
   ],
   entryComponents: [
     DialogOverviewExample,
     AdminDialogComponent,
-    DialogEditButton,
+    DialogEditButtonComponent,
     CreateTestModalComponent
   ],
   declarations: [
     AdminDialogComponent,
     DialogOverviewExample,
-    DialogEditButton,
+    DialogEditButtonComponent,
     CreateTestModalComponent
   ],
   providers: [],
