@@ -1,18 +1,17 @@
-<form class="update-form" [formGroup]="updateForm" (submit)="updateQuestionsTest($event, data.$key, updateTests.value)"
-      #updateTests="ngForm">
+<form class="update-form" [formGroup]="updateForm" (submit)="updateQuestionsTest($event, data.$key, updateTests.value)" #updateTests="ngForm">
   <textarea type="text" formControlName='question' placeholder="Вопрос"></textarea>
-  <div>Ответы</div>
-  <!-- <input type="text" formControlName='correct' placeholder="Верный"> -->
+  <div>Ответы: </div>
   <div formArrayName="answers" class="well well-lg">
     <div *ngFor="let ans of answers.controls; let i=index" [formGroupName]="i">
-      <h4>Answer №{{i + 1}}</h4>
-      <input type="text" formControlName='answer' placeholder="Ответ">
+      <input type="text" formControlName='answer' placeholder="Ответ {{i + 1}}">
+      <input type="radio" formControlName='correct_answer' id="{{i + 1}}" name="correct_answer" (click)="checkCheckbox($event, i+1)"
+      />
+      <label for="{{i + 1}}"><span>{{i + 1}}</span></label>
     </div>
   </div>
   <button (click)="addDynamicAnswerInForm()" type="button">+</button>
   <button (click)="deleteDynamicAnswerInForm()" type="button">-</button>
-  <button type="button" (click)=pushToAnswers(updateTests.value)>Ещё ответ</button>
-
-  <button type="button" (click)=pushToNewQuestions(updateTests.value)>Следующий вопрос</button>
-  <button type="submit">Изменить тесты</button>
+  <!-- <button type="button" (click)=pushToAnswers(updateTests.value)>Ещё ответ</button> -->
+  <!-- <button type="button" (click)=pushToNewQuestions(updateTests.value)>Следующий вопрос</button> -->
+  <button type="submit">Следующий вопрос</button>
 </form>

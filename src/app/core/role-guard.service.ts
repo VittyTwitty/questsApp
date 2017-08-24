@@ -10,25 +10,21 @@ export class RoleGuard implements CanActivate {
   private user: any;
 
   constructor(public userService: UserService,
-              public authService: AuthService,
-              private router: Router) {
+    public authService: AuthService,
+    private router: Router) {
   }
 
   public canActivate(route: ActivatedRouteSnapshot,
-                     state: RouterStateSnapshot): boolean {
+    state: RouterStateSnapshot): boolean {
     let url: string = state.url;
     return this.checkLogin(url);
   }
 
   public checkLogin(url: string): boolean {
-    // if (this.user) {
-    this.authService.authListener()
-      .subscribe(
-        (data) => {
-          this.user = this.userService.getUser();
-          this.adminUid = this.user.uid;
-        });
-    // }
+    this.user = this.userService.getUser();
+    if (this.user) {
+      this.adminUid = this.user.uid;
+    }
     if (this.adminUid === 'kQvVa3wF3VPJg2SVolGQsOOiHwy1') {
       return true;
     } else {
