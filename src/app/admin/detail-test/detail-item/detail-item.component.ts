@@ -32,7 +32,7 @@ export class DetailItemComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   public deleteQuestion(keyOfQuestion) {
-    this.addTestsService.getQuestion(this.id, keyOfQuestion)
+    this.addTestsService.getQuestion(this.id, keyOfQuestion);
     this.addTestsService.removeQuestion();
 
   }
