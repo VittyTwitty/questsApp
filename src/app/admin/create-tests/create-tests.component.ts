@@ -33,6 +33,10 @@ export class CreateTestsComponent implements OnInit, OnDestroy {
     });
   }
 
+  public inTest(event, key) {
+    console.log(key);
+  }
+
   public deleteTest(event, key) {
     this.keys.forEach((element) => {
       if (element === key) {

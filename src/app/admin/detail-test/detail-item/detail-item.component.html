@@ -1,0 +1,10 @@
+<hr>
+<button (click)="deleteQuestion(question)">x</button>
+<div class="question-head">
+  <h3>Вопрос: </h3>
+  <div>{{selfQuestion.question}}</div>
+</div>
+<b>Ответы:</b>
+<div class="question-body" *ngFor="let answer of selfQuestion.answers">
+  {{answer}}
+</div>

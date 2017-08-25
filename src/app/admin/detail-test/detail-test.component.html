@@ -1,0 +1,9 @@
+<div>test {{id}}</div>
+{{questions | json}}
+<div *ngFor="let question of questions; let i = index">
+  <detail-item-component [question]="question" [id]=id [i]=key></detail-item-component>
+
+</div>
+
+
+<button-edit-modal [item]=id></button-edit-modal>

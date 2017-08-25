@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, Inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Inject, Optional } from '@angular/core';
 import { AddTestService } from '../../../shared/services/add-test.service';
 import { AddTest } from '../../../shared/models/add-test';
 import { Subscription } from 'rxjs/Subscription';
@@ -39,8 +39,8 @@ export class CreateTestModalComponent implements OnInit, OnDestroy {
   });
 
   constructor(private addTestService: AddTestService,
-    private fb: FormBuilder,
-    @Inject(MD_DIALOG_DATA) public data: any) {
+              private fb: FormBuilder,
+              @Optional() @Inject(MD_DIALOG_DATA) public data: any) {
     this.flagTrue = true;
   }
 
@@ -50,8 +50,9 @@ export class CreateTestModalComponent implements OnInit, OnDestroy {
       res.forEach((el) => {
         this.keys.push(el.$key);
         this.testItem = el;
-        this.tests.push(this.testItem);
+        // this.tests.push(this.testItem);
       });
+      console.log(this.keys);
     });
   }
 
@@ -77,25 +78,22 @@ export class CreateTestModalComponent implements OnInit, OnDestroy {
   }
 
   public updateQuestionsTest(ev, key: string, value) {
+    ev.preventDefault();
     this.questionFormForm = value.question;
+    console.log(this.questionFormForm)
     this.newArrayAnswers = [];
     for (let key in value.answers) {
       if (value.answers[key] !== '') {
         this.newArrayAnswers.push(value.answers[key].answer);
-        console.log(value.answers[key].answer);
       }
     }
-
-    ev.preventDefault();
     this.addTestService.getTests2(key);
     this.addTestService.addTest({
       answers: this.newArrayAnswers,
       question: this.questionFormForm,
       correct: this.correct
     });
-
-    this.resetForm()
-
+    this.resetForm();
   }
 
   // public pushToNewQuestions(value) {
@@ -111,7 +109,7 @@ export class CreateTestModalComponent implements OnInit, OnDestroy {
 
   public resetForm() {
     if (this.updateForm.valid) {
-      console.log("Form Submitted!");
+      console.log('Form Submitted!');
       this.updateForm.reset();
     }
   }
@@ -124,7 +122,7 @@ export class CreateTestModalComponent implements OnInit, OnDestroy {
   // }
   public checkCheckbox(ev, i: number) {
     if (ev.target.checked) {
-      console.log(i)
+      console.log(i);
       this.correct = i;
     }
   }

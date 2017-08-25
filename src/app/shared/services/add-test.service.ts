@@ -4,6 +4,7 @@ import { AddTest } from '../models/add-test';
 
 @Injectable()
 export class AddTestService {
+  public qusetion: FirebaseObjectObservable<any>;
   public tests2: FirebaseListObservable<any[]>;
 
   private basePath: string = 'questions/';
@@ -20,9 +21,16 @@ export class AddTestService {
   }
 
   public getTests2(key): FirebaseListObservable<AddTest[]> {
-    const itemPath = `${this.basePath}/${key}`;
+    const itemPath = `${this.basePath}/${key}/`;
     this.tests2 = this.db.list(itemPath);
     return this.tests2;
+  }
+
+  public getQuestion(key, key2): FirebaseObjectObservable<any> {
+    console.log(key, key2)
+    const itemPath = `${this.basePath}/${key}/${key2}`;
+    this.qusetion = this.db.object(itemPath);
+    return this.qusetion;
   }
 
   public getOneTest(key: string): FirebaseObjectObservable<any> {
@@ -45,5 +53,9 @@ export class AddTestService {
 
   public removeTest(key) {
     this.tests.remove(key);
+  }
+
+  public removeQuestion() {
+    this.qusetion.remove();
   }
 }

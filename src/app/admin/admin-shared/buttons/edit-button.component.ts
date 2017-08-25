@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { MdDialog } from '@angular/material';
-import { CreateTestModalComponent } from '../../create-tests/create-test-modal/create-test-modal.component';
+import { CreateTestModalComponent } from '../../detail-test/create-test-modal/create-test-modal.component';
 
 @Component({
   selector: 'button-edit-modal',

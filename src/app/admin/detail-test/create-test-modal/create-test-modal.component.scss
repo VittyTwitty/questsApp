@@ -1,4 +1,5 @@
-@import '../../../../styles/_variables.scss';
+@import '../../../../styles/variables';
+
 .update-form {
   display: flex;
   flex-direction: column;
@@ -19,56 +20,59 @@
   }
 }
 
-
-
 input[type="radio"] {
   position: absolute;
   opacity: 0;
   z-index: -1;
 }
+
 label {
   position: relative;
   display: inline-block;
-  width: 80px;
+  width: 60px;
   height: 25px;
   line-height: 27px;
   cursor: pointer;
   padding: 0;
-  margin: 0;  
+  margin: 0;
   text-align: center;
   z-index: 1;
-  span {   
+  span {
     display: inline-block;
-    margin-left: 2px;
+    margin-left: 4px;
   }
 }
+
 label::before {
   content: " ";
   position: absolute;
-  top: 0;
+  top: 3px;
   left: 0;
   display: block;
-  width: 25px;
-  height: 25px;
+  width: 15px;
+  height: 15px;
   border: 2px solid $admin_main_color;
   border-radius: 4px;
   z-index: -1;
 }
+
 input[type="radio"] + label::before {
   border-radius: 18px;
 }
+
 /* Checked */
-input[type="checkbox"]:checked + label,
+
 input[type="radio"]:checked + label {
   color: #fff;
 }
-input[type="checkbox"]:checked + label::before,
+
 input[type="radio"]:checked + label::before {
   top: 0;
   width: 100%;
   height: 100%;
   background: $admin_main_color;
 }
+
 /* Transition */
 label,
 label::before {

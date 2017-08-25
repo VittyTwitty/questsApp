@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminDialogComponent } from './admin-modal/admin-modal';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CreateTestModalComponent } from '../create-tests/create-test-modal/create-test-modal.component';
+import { CreateTestModalComponent } from '../detail-test/create-test-modal/create-test-modal.component';
 import { DialogOverviewExample } from './buttons/add-button.component';
 import { DialogEditButtonComponent } from './buttons/edit-button.component';
 

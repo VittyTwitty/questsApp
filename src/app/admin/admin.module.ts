@@ -14,6 +14,8 @@ import {
 } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AdminSharedModule } from './admin-shared/admin-shared.module';
+import { DetailTestComponent } from './detail-test/detail-test.component';
+import { DetailItemComponent } from './detail-test/detail-item/detail-item.component';
 
 @NgModule({
   imports: [
@@ -34,6 +36,8 @@ import { AdminSharedModule } from './admin-shared/admin-shared.module';
     AdminComponent,
     AdminStatisticComponent,
     CreateTestsComponent,
+    DetailTestComponent,
+    DetailItemComponent
   ],
   providers: [],
 })
