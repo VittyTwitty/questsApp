@@ -58,6 +58,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MdNativeDateModule } from '@angular/material';
 import { AddTestService } from './shared/services/add-test.service';
 
+
 // Application wide providers
 const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,

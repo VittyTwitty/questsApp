@@ -4,20 +4,23 @@
   <div class="grid" data-grid="center none">
     <div class="grid__item" data-grid="8/12">
       <h2>Name of test</h2>
+      {{quest | json}}
       <div class="s-question_body" *ngIf="quest">
         <div class="s-question_title">
           {{quest[ind].question}}
         </div>
         <div class="grid s-question_list" data-grid="center none">
-          <div class="grid__item" data-grid="3/12">
-            <div class="s-question_item">
-              <div class="radio">
-                <input id="radio-1" (click)="toggleTrueFlag()" name="radio" type="radio">
-                <label for="radio-1" class="radio-label">{{quest[ind].answers.a1}}</label>
+          <ng-template ngFor let-ans let-i=index [ngForOf]="quest[ind].answers">
+            <div class="grid__item" data-grid="3/12">
+              <div class="s-question_item">
+                <div class="radio">
+                  <input id="radio-{{i}}" (click)="toggleTrueFlag()" name="radio" type="radio">
+                  <label for="radio-{{i}}" class="radio-label">{{ans}}</label>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="grid__item" data-grid="3/12">
+          </ng-template>
+          <!-- <div class="grid__item" data-grid="3/12">
             <div class="s-question_item">
               <div class="radio">
                 <input id="radio-2" (click)="toggleTrueFlag()" name="radio" type="radio">
@@ -40,13 +43,12 @@
                 <label for="radio-4" class="radio-label">{{quest[ind].answers.a4}}</label>
               </div>
             </div>
-          </div>
+          </div> -->
 
         </div>
         <div class="grid s-question_list" data-grid="center none">
           <div class="grid__item" data-grid="3/12">
-            <button class="s-question_submit" (click)="nextAnswer()" [disabled]="flagTrue"
-                    [class.disable-highlight]="flagTrue" >Answer
+            <button class="s-question_submit" (click)="nextAnswer()" [disabled]="flagTrue" [class.disable-highlight]="flagTrue">Answer
             </button>
           </div>
         </div>

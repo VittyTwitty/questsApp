@@ -58,4 +58,8 @@ export class AddTestService {
   public removeQuestion() {
     this.qusetion.remove();
   }
+
+  public updateQuestion(obj: {}) {
+    this.qusetion.update(obj)
+  }
 }

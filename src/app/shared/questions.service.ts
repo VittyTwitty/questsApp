@@ -16,11 +16,11 @@ export class QuestionService {
   };
 
   public getQuestion() {
-    return this.af.list('/questions/test_main', {
-      query: {
-        limitToLast: 5
-      }
-    });
+    return this.af.list('/questions');
+  }
+
+  public getOneQuestion(key): FirebaseListObservable<any[]> {
+    return this.af.list(`/questions/${key}`);
   }
 
   public getQuestionInfoFromForm() {

@@ -6,7 +6,7 @@ import { QuestionGuard } from '../shared/question-guard';
 
 export const questionsRoutes: Routes = [
     {
-        path: 'question',
+        path: 'question/:id',
         component: QuestionsListComponent,
         canActivate: [QuestionGuard],
     },

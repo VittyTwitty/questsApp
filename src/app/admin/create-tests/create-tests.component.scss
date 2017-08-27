@@ -42,5 +42,29 @@
         width: 100%;
       }
     }
+    .in-test {
+      width: 45px;
+      height: 45px;
+      line-height: 45px;
+      background: #5BB85D;
+      border: none;
+      border: 1px solid #5BB85D;
+      transition: .3s;
+      display: flex;
+      &:hover {
+        border: 1px solid #fff;
+      }
+      cursor: pointer;
+      svg {
+        width: 70%;
+        height: 70%;
+        margin: auto;
+        fill: #fff;
+      }
+
+    }
+  }
+  .plus {
+    display: block;
   }
 }

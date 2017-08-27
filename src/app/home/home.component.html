@@ -15,58 +15,34 @@
           <br>
         </div>
         <div class="s-home_user-description" *ngIf="!loggedInUser">
-          <div> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Pariatur nobis esse non eos, corporis nulla
-            doloremque sit explicabo veritatis culpa.
+          <div> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Pariatur nobis esse non eos, corporis nulla doloremque
+            sit explicabo veritatis culpa.
           </div>
         </div>
         <div class="s-home_user-rating">
           Lorem ipsum dolor.
         </div>
 
-        <button class="go-admin" *ngIf="r" routerLink="/admin"> Перейти в админку</button>
+        <button class="go-admin" *ngIf="r && loggedInUser" routerLink="/admin"> Перейти в админку</button>
       </div>
     </div>
     <div class="grid__item" data-grid="4/12">
       <div class="grid" data-grid="left none">
-        <div class="grid__item mgbt20" data-grid="6/12">
-          <a routerLink="/question" (click)="counter()" class="s-home_test">
-            <div class="s-home_test-img">
-              <img src="../../assets/img/stats.png" alt="">
-            </div>
-            <h3 class="s-home_test-descr">
-              Title test
-            </h3>
-            <div class="s-home_test-descr">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure quaerat nam, ipsa.
-            </div>
-          </a>
-        </div>
-        <div class="grid__item mgbt20" data-grid="6/12">
-          <div class="s-home_test">
-            <div class="s-home_test-img">
-              <img src="../../assets/img/calculator.png" alt="">
-            </div>
-            <h3 class="s-home_test-descr">
-              Тест планируется
-            </h3>
-            <div class="s-home_test-descr">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure quaerat nam, ipsa.
-            </div>
+        <ng-template ngFor let-tst [ngForOf]="tests">
+          <div class="grid__item mgbt20" data-grid="6/12">
+            <a [routerLink]="['/question', tst.$key]" (click)="counter()" class="s-home_test">
+              <div class="s-home_test-img">
+                <img src="../../assets/img/stats.png" alt="">
+              </div>
+              <h3 class="s-home_test-descr">
+                {{tst.name_test}}
+              </h3>
+              <div class="s-home_test-descr">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure quaerat nam, ipsa.
+              </div>
+            </a>
           </div>
-        </div>
-        <div class="grid__item mgbt20" data-grid="6/12">
-          <div class="s-home_test">
-            <div class="s-home_test-img">
-              <img src="../../assets/img/java.png" alt="">
-            </div>
-            <h3 class="s-home_test-descr">
-              Тест планируется
-            </h3>
-            <div class="s-home_test-descr">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure quaerat nam, ipsa.
-            </div>
-          </div>
-        </div>
+        </ng-template>
 
       </div>
     </div>

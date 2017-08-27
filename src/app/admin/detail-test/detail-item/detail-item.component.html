@@ -1,10 +1,34 @@
-<hr>
-<button (click)="deleteQuestion(question)">x</button>
-<div class="question-head">
-  <h3>Вопрос: </h3>
-  <div>{{selfQuestion.question}}</div>
-</div>
-<b>Ответы:</b>
-<div class="question-body" *ngFor="let answer of selfQuestion.answers">
-  {{answer}}
-</div>
+<form class="detail-item-wrp" [formGroup]="editForm" (submit)="editQuestionsTest($event, question, editTests.value)" #editTests="ngForm">
+
+  <div class="question-head">
+    <button class="close" (click)="deleteQuestion(question)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 224.5 224.5" width="512" height="512"><polygon points="224.5 7 217.5 0 112.3 105.3 7 0 0 7 105.3 112.3 0 217.5 7 224.5 112.3 119.2 217.5 224.5 224.5 217.5 119.2 112.3 " /></svg></button>
+    <h3>Вопрос: </h3>
+
+    <div *ngIf="changeFlag" class="question-head_question--edit">
+      <input name="question" formControlName="question" [(ngModel)]="selfQuestion.question" placeholder="Вопрос">
+    </div>
+    <div *ngIf="!changeFlag" class="question-head_question">{{selfQuestion.question}}</div>
+  </div>
+  <div class="question-body">
+    <h3>Ответы:</h3>
+    <div formArrayName="answers" class="well well-lg">
+      <div *ngFor="let ans of answers.controls; let i=index" [formGroupName]="i">
+
+        <div *ngIf="changeFlag" class="question-body_answer--edit">
+          <input name="answer" formControlName='answer' [(ngModel)]="selfQuestion.answers[i]" placeholder="Ответ">
+        </div>
+        <div *ngIf="!changeFlag" class="question-body_answer">
+          {{i+1}}) {{selfQuestion.answers[i]}}
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+  <button *ngIf="!changeFlag" class="detail-item-wrp_btn" class="edit-btn" (click)="editItem()">Edit</button>
+  <div>
+    <button *ngIf="changeFlag" class="detail-item-wrp_btn" class="save-btn" type="submit">Save</button>
+    <button *ngIf="changeFlag" class="detail-item-wrp_btn" class="cancel-btn" (click)="cancelItem()">Cancel</button>
+  </div>
+
+</form>

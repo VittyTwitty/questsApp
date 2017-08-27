@@ -85,6 +85,7 @@
     "@angular/router": "~4.3.1",
     "@angularclass/hmr": "~1.2.2",
     "@angularclass/hmr-loader": "^3.0.4",
+    "angular-froala-wysiwyg": "^1.0.0",
     "angularfire2": "^4.0.0-rc.1",
     "bootstrap": "^4.0.0-alpha.2",
     "chart.js": "^2.6.0",

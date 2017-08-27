@@ -35,21 +35,11 @@ body {
 button-edit-modal {
   display: flex;
 }
-.button_edit-test {
-  background: #259B24;
-  color: $admin_main_color; 
-  border: none;
-  border:1px solid #259B24;
-  cursor: pointer;
-  transition: .3s;
-  width: 45px;
-  height: 45px;
-  svg {
-    width: 100%;
-    height: 100%;
-    fill: #fff; 
-  }
-  &:hover { 
-    border:1px solid #fff; 
-  }
+
+
+
+detail-test {
+  width: 100%;
+  overflow-y: scroll;
+  background-color: #F5F5F5;
 }

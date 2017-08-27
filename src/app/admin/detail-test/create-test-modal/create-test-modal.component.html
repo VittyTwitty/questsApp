@@ -1,6 +1,6 @@
 <form class="update-form" [formGroup]="updateForm" (submit)="updateQuestionsTest($event, data, updateTests.value)"
       #updateTests="ngForm">
-  {{data | json}}
+  <div>Вопрос: </div> 
   <textarea type="text" formControlName='question' placeholder="Вопрос"></textarea>
   <div>Ответы:</div>
   <div formArrayName="answers" class="well well-lg">

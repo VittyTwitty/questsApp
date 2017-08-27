@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { QuestionService } from '../../shared/questions.service';
 import { Questions } from '../../shared/models/questions';
 import { Router } from '@angular/router';
 import { SharedService } from '../../shared/services/shared.service';
+import { ActivatedRoute } from "@angular/router";
+import { AddTestService } from "../../shared/services/add-test.service";
+import { Subscription } from "rxjs/Subscription";
 
 @Component({
   selector: 'q-question-list',
@@ -10,11 +13,14 @@ import { SharedService } from '../../shared/services/shared.service';
   styleUrls: ['questions-list.component.scss']
 })
 
-export class QuestionsListComponent implements OnInit {
+export class QuestionsListComponent implements OnInit, OnDestroy {
+
+  sub: Subscription;
+  public id: string;
   public q: any;
   public items: any;
   public answerThis: any[] = [];
-  public quest: Questions[];
+  public quest: any;
   public questionsId: number[] = [];
   public ind: number = 0;
 
@@ -24,10 +30,13 @@ export class QuestionsListComponent implements OnInit {
 
   public flagTrue: boolean;
 
-  constructor(private questionService: QuestionService,
-              private router: Router,
-              private sharedService: SharedService) {
-    this.getQuestions();
+  constructor(
+    private addTestService: AddTestService,
+    private questionService: QuestionService,
+    private router: Router,
+    private sharedService: SharedService,
+    public route: ActivatedRoute
+  ) {
     this.radio = document.getElementsByName('radio');
     this.button = document.getElementsByClassName('s-question_submit');
     this.flagTrue = true;
@@ -47,17 +56,30 @@ export class QuestionsListComponent implements OnInit {
           this.q = snapshot;
         });
       });
+
+    this.getQuestions();
   }
 
   public getQuestions() {
-    this.questionService
-      .getQuestion()
-      .subscribe((res) => {
+    this.id = this.route.snapshot.params['id'];
+    this.sub = this.addTestService.getOneTest(this.id)
+      .subscribe((data) => {
         this.quest = [];
-        res.forEach((q) => {
-          this.quest.push(q);
-        });
+        for (let key in data) {
+          if (key !== 'name_test') {
+            this.quest.push(data[key]);
+          }
+        }
+
+        console.log(this.quest);
       });
+    // this.addTestService
+    //   .getTests2(this.id)
+    //   .subscribe((res) => {
+    //     this.quest = [];
+
+    //     console.log(res)
+    //   });
   }
 
   public toggleTrueFlag() {
@@ -121,5 +143,9 @@ export class QuestionsListComponent implements OnInit {
       }
       this.router.navigate(['/result']);
     }
+  }
+
+  public ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

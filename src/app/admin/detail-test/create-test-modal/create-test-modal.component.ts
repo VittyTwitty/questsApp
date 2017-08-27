@@ -38,9 +38,10 @@ export class CreateTestModalComponent implements OnInit, OnDestroy {
     correct: new FormControl('')
   });
 
-  constructor(private addTestService: AddTestService,
-              private fb: FormBuilder,
-              @Optional() @Inject(MD_DIALOG_DATA) public data: any) {
+  constructor(
+    private addTestService: AddTestService,
+    private fb: FormBuilder,
+    @Optional() @Inject(MD_DIALOG_DATA) public data: any) {
     this.flagTrue = true;
   }
 
@@ -109,7 +110,6 @@ export class CreateTestModalComponent implements OnInit, OnDestroy {
 
   public resetForm() {
     if (this.updateForm.valid) {
-      console.log('Form Submitted!');
       this.updateForm.reset();
     }
   }

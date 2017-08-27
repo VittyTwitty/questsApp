@@ -12,10 +12,11 @@ import {
   MdDialogModule,
 
 } from '@angular/material';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AdminSharedModule } from './admin-shared/admin-shared.module';
 import { DetailTestComponent } from './detail-test/detail-test.component';
 import { DetailItemComponent } from './detail-test/detail-item/detail-item.component';
+
 
 @NgModule({
   imports: [
@@ -26,18 +27,19 @@ import { DetailItemComponent } from './detail-test/detail-item/detail-item.compo
     BrowserAnimationsModule,
     MdDialogModule,
     ReactiveFormsModule,
-    AdminSharedModule
+    AdminSharedModule,
+    FormsModule    
   ],
   exports: [
     CreateTestsComponent,
-    MdDialogModule
+    MdDialogModule,
   ],
   declarations: [
     AdminComponent,
     AdminStatisticComponent,
     CreateTestsComponent,
     DetailTestComponent,
-    DetailItemComponent
+    DetailItemComponent,
   ],
   providers: [],
 })

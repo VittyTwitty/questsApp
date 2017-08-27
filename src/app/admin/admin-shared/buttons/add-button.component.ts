@@ -14,7 +14,23 @@ import { MdDialog } from '@angular/material';
         <path
           d="M22.1 32.2c-0.4 0-0.7-0.3-0.7-0.7V12.8c0-0.4 0.3-0.7 0.8-0.7s0.8 0.3 0.8 0.8v18.6C22.9 31.8 22.5 32.2 22.1 32.2z"/>
       </svg>
-    </button>`
+    </button>`,
+  styles: [`
+    button {
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+    svg {
+      fill: #fff;
+      transition: all .3s;
+    }
+    button:hover > svg{
+      fill: #2C3144;
+    }
+    `]
 
 })
 export class DialogOverviewExample {
